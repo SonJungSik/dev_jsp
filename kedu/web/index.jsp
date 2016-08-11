@@ -11,7 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="../css/login.css" rel="stylesheet" type="text/css">
+<link href="css/login.css" rel="stylesheet" type="text/css">
 <title>로그인 페이지</title>
 
 
@@ -25,7 +25,7 @@
         <label for="userid" class="sr-only">userid</label>
         <input type="text" id="userid" class="form-control" placeholder="사번" required autofocus>
         <label for="password" class="sr-only">password</label>
-        <input type="password" id="password" class="form-control" placeholder="비밀번`호" required>
+        <input type="password" id="password" class="form-control" placeholder="비밀번호" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
