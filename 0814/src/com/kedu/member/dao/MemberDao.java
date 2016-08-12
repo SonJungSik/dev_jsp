@@ -11,16 +11,16 @@ import javax.sql.DataSource;
 import com.kedu.member.dto.MemberDto;
 
 public class MemberDao {
-	public MemberDao() {
-
+	private MemberDao() {
+	
 	}
-
+	
 	private static MemberDao instance = new MemberDao();
-
+	
 	public static MemberDao getInstance() {
 		return instance;
 	}
-
+	
 	public Connection getConnection() throws Exception {
 		Connection conn = null;
 		Context initContext = new InitialContext();
@@ -29,14 +29,15 @@ public class MemberDao {
 		conn = ds.getConnection();
 		return conn;
 	}
-
+	
 	// 사용자 인증시 사용하는 메소드
 	public int userCheck(String userid, String pwd) {
-		int result = 0;
+		int result = -1;
 		String sql = "select pwd from member where userid=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -45,7 +46,7 @@ public class MemberDao {
 			if (rs.next()) {
 				if (rs.getString("pwd") != null && rs.getString("pwd").equals(pwd)) {
 					result = 1;
-				} else {
+				} else{
 					result = 0;
 				}
 			} else {
@@ -55,7 +56,7 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) {
+				if(rs != null) {
 					rs.close();
 				}
 				if (pstmt != null) {
@@ -70,7 +71,7 @@ public class MemberDao {
 		}
 		return result;
 	}
-
+	
 	// 아이디로 회원 정보 가져오는 메소드
 	public MemberDto getMember(String userid) {
 		MemberDto mDto = null;
@@ -78,7 +79,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -92,6 +93,7 @@ public class MemberDao {
 				mDto.setEmail(rs.getString("email"));
 				mDto.setPhone(rs.getString("phone"));
 				mDto.setAdmin(rs.getInt("admin"));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,14 +114,12 @@ public class MemberDao {
 		}
 		return mDto;
 	}
-	
-	public int confirmId(String userid) {
+	public int confirmID(String userid) {
 		int result = -1;
 		String sql = "select userid from member where userid=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -127,12 +127,13 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = 1;
-			} else {
+			}
+			else{
 				result = -1;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		} finally{
 			try {
 				if (rs != null) {
 					rs.close();
@@ -147,15 +148,15 @@ public class MemberDao {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return result;	
 	}
 	
-	public int insertMember(MemberDto mDto){
+	public int insertMember(MemberDto mDto) {
 		int result = -1;
 		String sql = "insert into member values(?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
+		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -166,6 +167,7 @@ public class MemberDao {
 			pstmt.setString(5, mDto.getPhone());
 			pstmt.setInt(6, mDto.getAdmin());
 			result = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -183,13 +185,12 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int updateMember(MemberDto mDto){
+	public int updateMember(MemberDto mDto) {
 		int result = -1;
-		String sql = "update member set pwd=?, email=?,"
+		String sql ="update member set pwd=?, email=?,"
 				+ "phone=?, admin=? where userid=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -215,6 +216,4 @@ public class MemberDao {
 		}
 		return result;
 	}
-	
-	
 }
