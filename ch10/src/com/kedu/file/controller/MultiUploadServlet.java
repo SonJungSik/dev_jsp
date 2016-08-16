@@ -51,12 +51,12 @@ public class MultiUploadServlet extends HttpServlet {
 				String file_name = multi.getFilesystemName(file);
 				String ori_file_name = multi.getOriginalFileName(file);
 				out.println("<br> 업로드된 파일명 : " + file_name);
-				out.println("<br> 원분 파일명 : " + ori_file_name);
+				out.println("<br> 원본 파일명 : " + ori_file_name);
 				out.print("<hr>");
 			}
 	
 			
-		} catch (Exception e) {
+		} catch (Exception e) {	
 			System.out.println("예외 발생 : " + e);
 		}
 	}
