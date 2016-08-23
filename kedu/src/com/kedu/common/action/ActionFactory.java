@@ -1,4 +1,7 @@
-package com.kedu.common.action;
+ package com.kedu.common.action;
+
+import com.kedu.staff.action.StaffWriteAction;
+import com.kedu.staff.action.StaffWriteFormAction;
 
 public class ActionFactory {
 	private static ActionFactory instance = new ActionFactory();
@@ -17,6 +20,9 @@ public class ActionFactory {
 		
 		if (command.equals("staff_write")) {
 			action = new StaffWriteAction();
+		} else if (command.equals("staff_write_form")) {
+			action = new StaffWriteFormAction();
 		}
+		return action;
 	}
 }

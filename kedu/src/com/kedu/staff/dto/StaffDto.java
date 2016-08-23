@@ -3,7 +3,7 @@ package com.kedu.staff.dto;
 import java.sql.Timestamp;
 
 public class StaffDto {
-	private String stfid;
+	private int stfid;
 	private String pwd;
 	private String ismgr;
 	private String stfnm;
@@ -20,10 +20,10 @@ public class StaffDto {
 	private String regnm;
 	private int jobid;
 	private int deptid;
-	public String getStfid() {
+	public int getStfid() {
 		return stfid;
 	}
-	public void setStfid(String stfid) {
+	public void setStfid(int stfid) {
 		this.stfid = stfid;
 	}
 	public String getPwd() {

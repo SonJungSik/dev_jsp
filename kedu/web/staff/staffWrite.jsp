@@ -48,7 +48,7 @@
 				</div>
 			</div>
 		</nav>
-		<div class="row content" >
+		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<p>
 					<a href="#">Link</a>
@@ -61,27 +61,24 @@
 				</p>
 			</div>
 			<!-- 여기부터 contents -->
-			<div class="col-sm-8 text-left" style="overflow: auto; height: 690px">
+			<div class="col-sm-8 text-left" style="overflow: auto; height: 750px">
 				<h1 class="text-center">사원 등록 페이지</h1>
-				<form>
+				<form action="StaffServlet" method="post" enctype="mutipart/form-data" name="frm">
+					<input type="hidden" name="command" value="staff_write"> 	
 					<table class="table table-hober table-condensed">
-						
+			
 						<tr>
-							<td rowspan="15" class="col-sm-2">
-							<img src="../img/jquery.jpg" width="200em" height="200em">
-							<br />
-							<br />
-							<input type="file"></td>
+							<td rowspan="14" class="col-sm-2"><img
+								src="img/jquery.jpg" width="200em" height="200em"> <br />
+								<br /> <input type="file" name="pic_img"></td>
 							<th class="col-sm-2">사번</th>
 							<td class="col-sm-8"><input type="text" name="stfid"></td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" name="pwd"></td>
-						</tr>
-						<tr>
-							<th>비밀번호확인</th>
-							<td><input type="password" name="pwd"></td>
+							<td><input type="password" name="pwd">
+								&nbsp;비밀번호확인&nbsp;&nbsp;<input type="password" name="pwd">
+							</td>
 						</tr>
 						<tr>
 							<th>이름</th>
@@ -89,12 +86,24 @@
 						</tr>
 						<tr>
 							<th>주민번호</th>
-							<td><input type="text" name="jumin1">-<input type="text" name="jumin2"></td>
+							<td><input type="text" name="jumin1">-<input
+								type="text" name="jumin2"></td>
 						</tr>
-						
 						<tr>
-							<th>성별</th>
-							<td><input type="text" name="gender"></td>
+							<th>전화번호</th>
+							<td><input type="text" name="phone"></td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td><input type="text" name="address"></td>
+						</tr>
+						<tr>
+							<th>상세주소</th>
+							<td><input type="text" name="add_detail"></td>
+						</tr>
+						<tr>
+							<th>연봉</th>
+							<td><input type="text" name="salary"></td>
 						</tr>
 						<tr>
 							<th>부서</th>
@@ -105,60 +114,44 @@
 							<td><input type="text" name="jobid"></td>
 						</tr>
 						<tr>
-							<th>전화번호</th>
-							<td><input type="text" name="phone"></td>
-						</tr>
-						<tr>
 							<th>입사일</th>
 							<td><input type="text" name="entrydt"></td>
 						</tr>
-						<tr>
-							<th>연봉</th>
-							<td><input type="text" name="salary"></td>
-						</tr>
-						<tr>
-							<th>주소</th>
-							<td><input type="text" name="salary"></td>
-						</tr>
-						<tr>
-							<th>상세주소</th>
-							<td><input type="text" name="salary"></td>
-						</tr>
-						<tr>
-							<th>부서</th>
-							<td><input type="text" name="salary"></td>
-						</tr>
-						<tr>
-							<th>직급</th>
-							<td><input type="text" name="salary"></td>
-						</tr>
+						
 					</table>
+					<h4>상세정보 입력</h4>
 					<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-  </ul>
+						<li class="active"><a data-toggle="tab" href="#home">학력사항</a></li>
+						<li><a data-toggle="tab" href="#menu1">경력사항</a></li>
+						<li><a data-toggle="tab" href="#menu2">자격증</a></li>
+					</ul>
 
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-					<div style="text-align: center"><input type="submit" value="등록"> <input type="button" value="취소">
+					<div class="tab-content">
+						<div id="home" class="tab-pane fade in active">
+							<table class="table table-hober table-condensed">
+								<tr>
+									<th>학교명</th><th>입학일자</th><th>졸업일자</th><th>전공</th><th>졸업구분</th><th>성적</th>
+								</tr>
+							</table>
+						</div>
+						<div id="menu1" class="tab-pane fade">
+							<table class="table table-hober table-condensed">
+								<tr>
+									<th>직장명</th><th>입사일</th><th>퇴사일</th><th>최종직위</th><th>담당업무</th><th>월급여</th>
+								</tr>
+							</table>
+						</div>
+						<div id="menu2" class="tab-pane fade">
+							<table class="table table-hober table-condensed">
+								<tr>
+									<th>자격증명</th><th>자격증번호</th><th>취득일</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div style="text-align: center">
+						<input type="submit" value="등록"> <input type="button"
+							value="취소">
 					</div>
 				</form>
 

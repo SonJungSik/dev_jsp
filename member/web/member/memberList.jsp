@@ -112,7 +112,8 @@ div#users-contain table td, div#users-contain table th {
 			if (valid) {
 				
 				
-				document.getElementById("frm").submit();
+				//document.getElementById("frm").submit();
+				$("#frm").submit();
 				dialog.dialog("close");
 				
 			}

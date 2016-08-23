@@ -1,0 +1,21 @@
+drop table staff;
+
+create table staff (
+	  stfid			number			not null	-- 사원ID
+	, pwd			varchar2(30)	not null	-- 사원 비밀번호
+	, ismgr			char(1)			null		-- 관리자 여부
+	, stfnm			varchar2(30)	not null	-- 사원 이름
+	, jumin			varchar2(30)	not null	-- 주민번호
+	, phone			varchar2(20)	not null	-- 전화번호
+	, entrydt		date			not null	-- 입사일
+	, resigndt		date			not null	-- 퇴사일
+	, salary		number			not null	-- 연봉
+	, pic_img		varchar2(500)	null		-- 사진 위치
+	, pic_img_orn	varchar2(500)	null		-- 원래 사진 위치
+	, address		varchar2(300)	null		-- 주소
+	, add_detail	varchar2(300)	null		-- 상세 주소
+	, regdt			date			not null	-- 등록일
+	, regnm			varchar2(30)	null		-- 등록자
+	, jobid			number			null		-- 직급
+	, deptid		number			null		-- 부서
+);
