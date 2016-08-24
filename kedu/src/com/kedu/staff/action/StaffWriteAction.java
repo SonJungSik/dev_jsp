@@ -1,7 +1,6 @@
 package com.kedu.staff.action;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,29 +23,36 @@ public class StaffWriteAction implements Action {
 		String path = context.getRealPath("upload");
 		String encType = "UTF-8";
 		int sizeLimit = 20 * 1024 * 1024;
-		
-		StaffDto sDto = new StaffDto();
+		System.out.println("multi 생성전");			
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, encType, new DefaultFileRenamePolicy());
 		
+		System.out.println("multi 생성");
+		StaffDto sDto = new StaffDto();
 		sDto.setStfid(Integer.parseInt(multi.getParameter("stfid")));
+		sDto.setStfnm(multi.getParameter("stfnm"));
 		sDto.setPwd(multi.getParameter("pwd"));
 		sDto.setJumin(multi.getParameter("jumin1") + multi.getParameter("jumin2"));
 		sDto.setPhone(multi.getParameter("phone"));
-		sDto.setEntrydt(Timestamp.valueOf(multi.getParameter("entrydt")));
+		sDto.setEntrydt(multi.getParameter("entrydt"));
 		sDto.setSalary(Integer.parseInt(multi.getParameter("salary")));
 		sDto.setPic_img(multi.getFilesystemName("pic_img"));
 		sDto.setPic_img_orn(multi.getOriginalFileName("pic_img"));
 		sDto.setAddress(multi.getParameter("address"));
 		sDto.setAdd_detail(multi.getParameter("add_detail"));
-		sDto.setRegnm(multi.getParameter("regnm"));
+		
 		sDto.setJobid(Integer.parseInt(multi.getParameter("jobid")));
 		sDto.setDeptid(Integer.parseInt(multi.getParameter("deptid")));
 		
+
+		sDto.setIsmgr("Y");					// 관리자 여부 나중에
+		sDto.setRegnm("손정식");				// 등록자 나중에
 		StaffDao sDao = StaffDao.getInstance();
 		sDao.insertStaff(sDto);
 		
-		new StaffListAction().execute(request, response);
+		System.out.println("insert 성공");
+		
+		new MainAction().execute(request, response);
 	}
 
 }

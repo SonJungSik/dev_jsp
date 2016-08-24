@@ -1,6 +1,5 @@
 package com.kedu.staff.dto;
 
-import java.sql.Timestamp;
 
 public class StaffDto {
 	private int stfid;
@@ -9,17 +8,33 @@ public class StaffDto {
 	private String stfnm;
 	private String jumin;
 	private String phone;
-	private Timestamp entrydt;
-	private Timestamp resigndt;
+	private String entrydt;
+	private String resigndt;
 	private int salary;
 	private String pic_img;
 	private String pic_img_orn;
 	private String address;
 	private String add_detail;
-	private Timestamp regdt;
+	private String regdt;
 	private String regnm;
 	private int jobid;
 	private int deptid;
+	
+	private String deptnm;
+	private String jobnm;
+	
+	public String getDeptnm() {
+		return deptnm;
+	}
+	public void setDeptnm(String deptnm) {
+		this.deptnm = deptnm;
+	}
+	public String getJobnm() {
+		return jobnm;
+	}
+	public void setJobnm(String jobnm) {
+		this.jobnm = jobnm;
+	}
 	public int getStfid() {
 		return stfid;
 	}
@@ -56,16 +71,16 @@ public class StaffDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Timestamp getEntrydt() {
+	public String getEntrydt() {
 		return entrydt;
 	}
-	public void setEntrydt(Timestamp entrydt) {
+	public void setEntrydt(String entrydt) {
 		this.entrydt = entrydt;
 	}
-	public Timestamp getResigndt() {
+	public String getResigndt() {
 		return resigndt;
 	}
-	public void setResigndt(Timestamp resigndt) {
+	public void setResigndt(String resigndt) {
 		this.resigndt = resigndt;
 	}
 	public int getSalary() {
@@ -98,10 +113,10 @@ public class StaffDto {
 	public void setAdd_detail(String add_detail) {
 		this.add_detail = add_detail;
 	}
-	public Timestamp getRegdt() {
+	public String getRegdt() {
 		return regdt;
 	}
-	public void setRegdt(Timestamp regdt) {
+	public void setRegdt(String regdt) {
 		this.regdt = regdt;
 	}
 	public String getRegnm() {
@@ -123,14 +138,5 @@ public class StaffDto {
 		this.deptid = deptid;
 	}
 	
-	@Override
-	public String toString() {
-		return "StaffDto [stfid=" + stfid + ", pwd=" + pwd + ", ismgr=" + ismgr + ", stfnm=" + stfnm + ", jumin="
-				+ jumin + ", phone=" + phone + ", entrydt=" + entrydt + ", resigndt=" + resigndt + ", salary=" + salary
-				+ ", pic_img=" + pic_img + ", pic_img_orn=" + pic_img_orn + ", address=" + address + ", add_detail="
-				+ add_detail + ", regdt=" + regdt + ", regnm=" + regnm + ", jobid=" + jobid + ", deptid=" + deptid
-				+ "]";
-	}
-
 	
 }

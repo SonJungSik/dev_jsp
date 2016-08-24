@@ -8,7 +8,7 @@ create table staff (
 	, jumin			varchar2(30)	not null	-- 주민번호
 	, phone			varchar2(20)	not null	-- 전화번호
 	, entrydt		date			not null	-- 입사일
-	, resigndt		date			not null	-- 퇴사일
+	, resigndt		date			null		-- 퇴사일
 	, salary		number			not null	-- 연봉
 	, pic_img		varchar2(500)	null		-- 사진 위치
 	, pic_img_orn	varchar2(500)	null		-- 원래 사진 위치
@@ -19,3 +19,38 @@ create table staff (
 	, jobid			number			null		-- 직급
 	, deptid		number			null		-- 부서
 );
+
+drop table jobs;
+
+create table jobs (
+	  jobid 		number
+	, jobnm 		varchar2(30)
+);
+
+insert into jobs values(1, '인턴');
+insert into jobs values(2, '사원');
+insert into jobs values(3, '주임');
+insert into jobs values(4, '대리');
+insert into jobs values(5, '과장');
+insert into jobs values(6, '차장');
+insert into jobs values(7, '부장');
+insert into jobs values(8, '상무');
+insert into jobs values(9, '전무');
+insert into jobs values(10, '부사장');
+insert into jobs values(11, '사장');
+
+commit;
+
+drop table departments;
+
+create table departments (
+	  deptid		number
+	, deptnm		varchar2(30)
+);
+
+insert into departments values(1, '총무');
+insert into departments values(2, '재경');
+insert into departments values(3, '인사');
+insert into departments values(4, '기술지원');
+
+commit;

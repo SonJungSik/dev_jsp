@@ -41,9 +41,9 @@
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">사원 등록</a></li>
-								<li><a href="#">사원 리스트</a></li>
-								<li><a href="#">Page 1-3	</a></li>
+								<li><a href="StaffServlet?command=staff_write_form">사원 등록</a></li>
+								<li><a href="StaffServlet?command=staff_list">사원 리스트</a></li>
+								<li><a href="#">여긴 뭐하지	</a></li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">프로젝트 <span class="caret"></span></a>
