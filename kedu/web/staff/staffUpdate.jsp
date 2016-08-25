@@ -21,48 +21,53 @@
 
 <!-- 달력위한 것듯 -->
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 <script>
-	$(function() {
-		$("#entrydt").datepicker(
-				{
-					dateFormat : 'yy-mm-dd',
-					changeMonth : true,
-					dayNames : [ '월요일', '화요일', '수요일', '목요일', '금요일', '토요일',
-							'일요일' ],
-					dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
-					monthNamesShort : [ '1', '2', '3', '4', '5', '6', '7', '8',
-							'9', '10', '11', '12' ],
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ]
+  $( function() {
+    $( "#entrydt" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
+    	changeMonth: true,
+    	dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+    	 	
+    });
+    
+    $( "#resigndt" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
+    	changeMonth: true,
+    	dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+    	 	
+    });
+    /* 이미지 미리보기*/
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+            reader.onload = function (e) {
+            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                $('#pic_image').attr('src', e.target.result);
+                //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+                //(아래 코드에서 읽어들인 dataURL형식)
+            }                   
+            reader.readAsDataURL(input.files[0]);
+            //File내용을 읽어 dataURL형식의 문자열로 저장
+        }
+    }//readURL()--
 
-				});
-		/* 이미지 미리보기*/
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-				reader.onload = function(e) {
-					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-					$('#pic_image').attr('src', e.target.result);
-					//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
-					//(아래 코드에서 읽어들인 dataURL형식)
-				}
-				reader.readAsDataURL(input.files[0]);
-				//File내용을 읽어 dataURL형식의 문자열로 저장
-			}
-		}//readURL()--
-
-		//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
-		$("#pic_img").change(function() {
-			//alert(this.value); //선택한 이미지 경로 표시
-			readURL(this);
-		});
-
-	});
-</script>
-<!-- 달력 끝 -->
+    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
+    $("#pic_img").change(function(){
+        //alert(this.value); //선택한 이미지 경로 표시
+        readURL(this);
+    });
+    
+  } );
+  </script>
+ <!-- 달력 끝 -->
 <link href="../../css/view.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -108,27 +113,28 @@
 			</div>
 			<!-- 여기부터 contents -->
 			<div class="col-sm-8 text-left" style="overflow: auto; height: 750px">
-				<h1 class="text-center">사원 등록 페이지</h1>
-				<form action="StaffServlet?command=staff_write" method="post"
+				<h1 class="text-center">사원 수정 페이지</h1>
+				<form action="StaffServlet?command=staff_update" method="post"
 					enctype="multipart/form-data" name="frm">
 					<input type="hidden" name="command" value="staff_write">
 					<table class="table table-hober table-condensed">
 
 						<tr>
 							<td rowspan="14" class="col-sm-2"><img src="img/jquery.jpg"
-								width="200em" height="200em" id="pic_image"> <br /> <br />
-								<input type="file" name="pic_img" id="pic_img"></td>
+								width="200em" height="200em" id="pic_image"> <br /> <br /> <input
+								type="file" name="pic_img" id="pic_img"></td>
 							<th class="col-sm-2">사번</th>
-							<td class="col-sm-8"><input type="text" name="stfid"></td>
+							<td class="col-sm-8"><input type="text" name="stfid" value="${staff.stfid }"></td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" name="pwd">
-								&nbsp;비밀번호확인&nbsp;&nbsp;<input type="password"></td>
+							<td><input type="password" name="pwd" value="${staff.pwd }">
+								&nbsp;비밀번호확인&nbsp;&nbsp;<input type="password" >
+							</td>
 						</tr>
 						<tr>
 							<th>이름</th>
-							<td><input type="text" name="stfnm"></td>
+							<td><input type="text" name="stfnm" value="${staff.stfnm }"></td>
 						</tr>
 						<tr>
 							<th>주민번호</th>
@@ -137,59 +143,41 @@
 						</tr>
 						<tr>
 							<th>전화번호</th>
-							<td><input type="text" name="phone"></td>
+							<td><input type="text" name="phone" value="${staff.phone }"></td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td><input type="text" name="address"></td>
+							<td><input type="text" name="address" value="${staff.address }"></td>
 						</tr>
 						<tr>
 							<th>상세주소</th>
-							<td><input type="text" name="add_detail"></td>
+							<td><input type="text" name="add_detail" value="${staff.add_detail }"></td>
 						</tr>
 						<tr>
 							<th>연봉</th>
-							<td><input type="text" name="salary"></td>
+							<td><input type="text" name="salary" value="${staff.salary}"></td>
 						</tr>
 						<tr>
 							<th>부서</th>
-							<td><select id="deptid" name="deptid">
-									<option>부서 선택</option>
-									<option value="1">총무</option>
-									<option value="2">재경</option>
-									<option value="3">인사</option>
-									<option value="4">기술지원</option>
-							</select></td>
+							<td><input type="text" name="deptid" ></td>
 						</tr>
 						<tr>
 							<th>직급</th>
-							<td><select id="jobid" name="jobid">
-									<option>직급 선택</option>
-									<option value="1">인턴</option>
-									<option value="2">사원</option>
-									<option value="3">주임</option>
-									<option value="4">대리</option>
-									<option value="5">과장</option>
-									<option value="6">차장</option>
-									<option value="7">부장</option>
-									<option value="8">상무</option>
-									<option value="9">전무</option>
-									<option value="10">부사장</option>
-									<option value="11">사장</option>
-							</select></td>
+							<td><input type="text" name="jobid"></td>
 						</tr>
 						<tr>
 							<th>입사일</th>
-							<td><input id="entrydt" name="entrydt" type="text">
+							<td>
+								<input id="entrydt" name="entrydt" value="${staff.entrydt }" type="text">
 							</td>
 						</tr>
-					 	<tr>
-							<th>관리자 여부</th>
-							<td><input type="radio" name="ismgr" value="N" checked="checked"> 일반사원
-								<input type="radio" name="ismgr" value="Y"> 관리자
-							
+						<tr>
+							<th>퇴사일</th>
+							<td>
+								<input id="resigndt" name="resigndt" type="text">
 							</td>
 						</tr>
+
 					</table>
 					<div style="text-align: center">
 						<input type="submit" value="등록"> <input type="button"
@@ -237,7 +225,7 @@
 							</table>
 						</div>
 					</div>
-
+					
 				</form>
 
 			</div>

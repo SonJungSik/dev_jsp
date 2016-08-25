@@ -1,7 +1,7 @@
 drop table staff;
 
 create table staff (
-	  stfid			number			not null	-- 사원ID
+	  stfid			varchar2(30)	not null	-- 사원ID
 	, pwd			varchar2(30)	not null	-- 사원 비밀번호
 	, ismgr			char(1)			null		-- 관리자 여부
 	, stfnm			varchar2(30)	not null	-- 사원 이름

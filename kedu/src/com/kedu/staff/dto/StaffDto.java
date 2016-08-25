@@ -2,7 +2,7 @@ package com.kedu.staff.dto;
 
 
 public class StaffDto {
-	private int stfid;
+	private String stfid;
 	private String pwd;
 	private String ismgr;
 	private String stfnm;
@@ -35,10 +35,10 @@ public class StaffDto {
 	public void setJobnm(String jobnm) {
 		this.jobnm = jobnm;
 	}
-	public int getStfid() {
+	public String getStfid() {
 		return stfid;
 	}
-	public void setStfid(int stfid) {
+	public void setStfid(String stfid) {
 		this.stfid = stfid;
 	}
 	public String getPwd() {

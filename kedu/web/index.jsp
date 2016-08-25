@@ -23,7 +23,7 @@
       <form class="form-signin" method="post" action="StaffServlet?command=login">
         <h2 class="form-signin-heading">로그인 </h2>
         <label for="userid" class="sr-only">userid</label>
-        <input type="text" id="stfid" name="stfid" class="form-control" placeholder="사번" required autofocus>
+        <input type="text" id="stfid" name="stfid"  class="form-control" placeholder="사번" required autofocus>
         <label for="password" class="sr-only">password</label>
         <input type="password" id="password"  name="pwd" class="form-control" placeholder="비밀번호" required>
         <div class="checkbox">
@@ -32,7 +32,9 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+ 		<div>${message }</div> 
       </form>
+      
       </div>
       </body>
 </html>

@@ -42,6 +42,7 @@ public class StaffDao {
 				+ "deptid) "		// 부서
 				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
 				
+				
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -49,7 +50,7 @@ public class StaffDao {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, sDto.getStfid());
+			pstmt.setString(1, sDto.getStfid());
 			pstmt.setString(2, sDto.getPwd());
 			pstmt.setString(3, sDto.getIsmgr());
 			pstmt.setString(4, sDto.getStfnm());
@@ -77,8 +78,9 @@ public class StaffDao {
 	public List<StaffDto> selectAllStaff() {
 		String sql = "select s.stfid, s.stfnm, j.jobnm, d.deptnm, s.phone, s.entrydt "
 				+ "from departments d, staff s, jobs j "
-				+ "where d.deptid=s.deptid "
-				+ "and j.jobid=s.jobid";
+				+ "where d.deptid = s.deptid "
+				+ "and j.jobid=s.jobid "
+				+ "order by s.stfid";
 		
 		List<StaffDto> list = new ArrayList<>();
 		Connection conn = null;
@@ -88,18 +90,19 @@ public class StaffDao {
 		try {
 			conn = DBManager.getConnection();
 			stmt = conn.createStatement();
+			
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
 				StaffDto sDto = new StaffDto();
 				
 				
-				sDto.setStfid(rs.getInt("s.stfid"));
-				sDto.setStfnm(rs.getString("s.stfnm"));
-				sDto.setJobnm(rs.getString("j.jobnm"));
-				sDto.setDeptnm(rs.getString("d.deptnm"));
-				sDto.setPhone(rs.getString("s.phone"));
-				sDto.setEntrydt(rs.getString("s.entrydt"));
+				sDto.setStfid(rs.getString("stfid"));
+				sDto.setStfnm(rs.getString("stfnm"));
+				sDto.setJobnm(rs.getString("jobnm"));
+				sDto.setDeptnm(rs.getString("deptnm"));
+				sDto.setPhone(rs.getString("phone"));
+				sDto.setEntrydt(rs.getString("entrydt"));
 				
 				list.add(sDto);
 			}
@@ -113,10 +116,9 @@ public class StaffDao {
 	}
 	
 	// 로그인 인증시 사용
-	
 	public int userCheck(String stfid, String pwd) {
 		int result = -1;
-		String sql = "select pwd, ismgr from member where stfid=?";
+		String sql = "select pwd, ismgr from staff where stfid=?";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -152,8 +154,117 @@ public class StaffDao {
 		return result;
 	}
 
+	// 사원 정보 세션 저장용
 	public StaffDto getStaff(String stfid) {
+		String sql = "select stfid, stfnm, ismgr from staff where stfid = ?";
+		
 		StaffDto sDto = null;
-		return null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, stfid);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				sDto = new StaffDto();
+				sDto.setStfid(rs.getString("stfid"));
+				sDto.setStfnm(rs.getString("stfnm"));
+				sDto.setIsmgr(rs.getString("ismgr"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return sDto;
+	}
+	
+	// 사원 정보 업데이트
+	public void updateStaff(StaffDto sDto) {
+		
+		String sql = "update staff set "
+				+ "stfid=?, "
+				+ "pwd=?, "
+				+ "ismgr=?, "
+				+ "stfnm=?, "
+				+ "jumin=?, "
+				+ "phone=?, "
+				+ "entrydt=?, "
+				+ "resigndt=?, "
+				+ "salary=?, "
+				+ "pic_img=?, "
+				+ "pic_img_orn=?, "
+				+ "address=?, "
+				+ "add_detail=?, "
+				+ "regdt=sysdate, "
+				+ "jobid=?, "
+				+ "deptid=? "
+				+ "where stfid= ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+	}
+
+	
+	// 사원 정보 업데이트폼에 뿌리기
+	public StaffDto selectOneStaff(String stfid) {
+	
+		String sql = "select * from staff where stfid = ?";
+		
+		StaffDto sDto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, stfid);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				sDto = new StaffDto();
+				
+				sDto.setStfid(rs.getString("stfid"));
+				sDto.setPwd(rs.getString("pwd"));
+				sDto.setIsmgr(rs.getString("ismgr"));
+				sDto.setStfnm(rs.getString("stfnm"));
+				sDto.setJumin(rs.getString("jumin"));
+				sDto.setPhone(rs.getString("phone"));
+				sDto.setEntrydt(rs.getString("entrydt"));
+				sDto.setResigndt(rs.getString("resigndt"));
+				sDto.setSalary(rs.getInt("salary"));
+				sDto.setPic_img(rs.getString("pic_img"));
+				sDto.setPic_img_orn(rs.getString("pic_img_orn"));
+				sDto.setAddress(rs.getString("address"));
+				sDto.setAdd_detail(rs.getString("add_detail"));
+				sDto.setRegdt(rs.getString("regdt"));
+				sDto.setRegnm(rs.getString("regnm"));
+				sDto.setJobid(rs.getInt("jobid"));
+				sDto.setDeptid(rs.getInt("deptid"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return sDto;
 	}
 }
