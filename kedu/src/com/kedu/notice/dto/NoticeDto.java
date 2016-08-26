@@ -1,19 +1,66 @@
 package com.kedu.notice.dto;
 
+import java.sql.Timestamp;
 
 public class NoticeDto {
-	private int noticeid;
+	private String stfid;
+	private int noticeno;
 	private String noticetitle;
 	private String regdt;
 	private int readcount;
-	private String comment;
-
-	public int getNoticeid() {
-		return noticeid;
+	private String contents;
+	private int deptid;
+	private String stfnm;
+	private String deptnm;
+	
+	
+	public String getDeptnm() {
+		return deptnm;
 	}
 
-	public void setNoticeid(int noticeid) {
-		this.noticeid = noticeid;
+	public void setDeptnm(String deptnm) {
+		this.deptnm = deptnm;
+	}
+
+	public String getStfnm() {
+		return stfnm;
+	}
+
+	public void setStfnm(String stfnm) {
+		this.stfnm = stfnm;
+	}
+
+	public String getStfid() {
+		return stfid;
+	}
+
+	public void setStfid(String stfid) {
+		this.stfid = stfid;
+	}
+
+	public int getNoticeno() {
+		return noticeno;
+	}
+
+	public void setNoticeno(int noticeno) {
+		this.noticeno = noticeno;
+	}
+
+
+	public String getRegdt() {
+		return regdt;
+	}
+
+	public void setRegdt(String regdt) {
+		this.regdt = regdt;
+	}
+
+	public int getDeptid() {
+		return deptid;
+	}
+
+	public void setDeptid(int deptid) {
+		this.deptid = deptid;
 	}
 
 	public String getNoticetitle() {
@@ -24,13 +71,6 @@ public class NoticeDto {
 		this.noticetitle = noticetitle;
 	}
 
-	public String getRegdt() {
-		return regdt;
-	}
-
-	public void setRegdt(String regdt) {
-		this.regdt = regdt;
-	}
 
 	public int getReadcount() {
 		return readcount;
@@ -40,12 +80,13 @@ public class NoticeDto {
 		this.readcount = readcount;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
+
 
 }

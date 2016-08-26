@@ -1,5 +1,7 @@
  package com.kedu.common.action;
 
+import com.kedu.notice.action.NoticeListAction;
+import com.kedu.notice.action.NoticeWriteAction;
 import com.kedu.notice.action.NoticeWriteFormAction;
 import com.kedu.staff.action.LoginAction;
 import com.kedu.staff.action.LoginFormAction;
@@ -43,7 +45,12 @@ public class ActionFactory {
 			action = new StaffUpdateAction();
 		} else if (command.equals("notice_write_form")) {	// notice임
 			action = new NoticeWriteFormAction();	
+		} else if (command.equals("notice_write")) {
+			action = new NoticeWriteAction();
+		} else if (command.equals("notice_list")) {
+			action = new NoticeListAction();
 		}
+		
 		return action;
 	}
 }

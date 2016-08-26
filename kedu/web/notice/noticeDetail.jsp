@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<meta charset="UTF-8">
 
 <!--페이지마다 복사  -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,47 +18,105 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--여기까지 복사  -->
-<title>공지사항  상세</title>
+<link href="../../css/view.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-<div class="col-sm-8 text-left">
-		<h1>공지사항 상세</h1>
-		<table class="table table-bordered">
-				<tr>
-					<th>작성자</th> <td>손정식</td>
-					<th>글번호</th> <td>111</td>
-				</tr>
-				<tr>
-					<th>작성일</th> <td>2016.08.06</td>			
-					<th>조회수</th> <td>100</td>			
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td colspan="3">내가 짱이지롱</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td colspan="3">글이 뭐가 있나?</td>
-				</tr>					</table>
-		<p align="center">
-		<input type="button" class="btn" value="수정">
-		<input type="button" class="btn" value="삭제">
-		<input type="button" class="btn" value="목록으로">
-		</p>
-		<p>
-		댓글 - 댓글 개수
-		</p>
-		<table class="table" >
-			<tr>
-				<td align="left">손정식 2016.08.06 22:40:42 <br>
-				 댓글 내용이 들어감</td>
-				<td><input type="button" class="btn" value="수정">
-				<input type="button" class="btn" value="삭제"></td>
-			</tr>
-		</table>
-		
+
+	<div class="container-fluid text-center">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#myNavbar">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Logo</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="StaffServlet?command=notice_list">공지사항</a></li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="StaffServlet?command=staff_write_form">사원 등록</a></li>
+								<li><a href="StaffServlet?command=staff_list">사원 리스트</a></li>
+								<li><a href="#">여긴 뭐하지	</a></li>
+							</ul></li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">프로젝트 <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">사원 등록</a></li>
+								<li><a href="#">Page 1-2</a></li>
+								<li><a href="#">Page 1-3</a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><span style="color: white;">${loginUser.stfnm}(${loginUser.stfid})님 안녕하세요 ${loginUser.ismgr }</span><br>
+														
+								</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+				<p>
+					<a href="#">Link</a>
+				</p>
+				<p>
+					<a href="#">Link</a>
+				</p>
+				<p>
+					<a href="#">Link</a>
+				</p>
+			</div>
+			<div class="col-sm-8 text-left">
+				<h4>공지사항 상세</h4>
+				<form>
+				<input type="hidden" name="command" value="notice_write">
+				<table class="table table-hober ">
+						<tr>
+							<th>제목</th>
+							<td colspan="3"><input type="text" class="form-control" name="noticetitle" maxlength="50" readonly="readonly" >${notice.noticetitle }</td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${notice.stfnm}</td>
+							<th>부서</th>
+							<td>${notice.deptnm }</td>
+						</tr>
+						<tr>
+							<th>작성일
+							<td>${notice.regdt }
+							<th>조회수</th>
+							<td>${notice.readcount}</td>
+						</tr>
+						<tr>
+							<td colspan="4" ><textarea class="form-control" rows="30" name="contents" readonly="readonly" >${notice.contents }</textarea></td>
+						</tr>							
+				</table>
+				<div>
+					<input type="submit" value="등록"> <input type="button" value="취소">
+				</div>
+				</form>	
+			</div>
+			<div class="col-sm-2 sidenav">
+				<div class="well">
+					<p>채팅</p>
+				</div>
+				<div class="well">
+					<p>ADS</p>
+				</div>
+			</div>
+		</div>
+		<footer class="container-fluid text-center">
+			<p>Footer Text</p>
+		</footer>
 	</div>
+
 </body>
 </html>
+

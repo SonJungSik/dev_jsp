@@ -54,3 +54,20 @@ insert into departments values(3, '인사');
 insert into departments values(4, '기술지원');
 
 commit;
+
+drop table notice;
+
+create table notice (
+	  stfid			varchar2(30)
+	, noticeno		number
+	, noticetitle	varchar2(100)
+	, contents		varchar2(1000)
+	, regdt			date	default sysdate
+	, readcount		number  default 0
+	, deptid		number
+);
+
+drop sequence notice_seq;
+
+create sequence notice_seq start with 1 increment by 1;
+

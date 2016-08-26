@@ -37,7 +37,7 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="StaffServlet?command=notice_list">공지사항</a></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -75,23 +75,34 @@
 			</div>
 			<div class="col-sm-8 text-left">
 				<h4>공지사항</h4>
-				<table class="table table-hober sm">
+				<form name="frm" method="post" action="StaffServlet">
+				<input type="hidden" name="command" value="notice_write">
+				<table class="table table-hober">
 						<tr>
 							<th>제목</th>
 							<td colspan="3"><input type="text" class="form-control" name="noticetitle" maxlength="50" ></td>
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td>login.stfid</td>
+							<td>${loginUser.stfnm} <input type="hidden" name="stfid" value="${loginUser.stfid}"></td>
 							<th>부서</th>
-							<td>staff.deptnm </td>
+							<td>
+								<select id="deptid" name="deptid">
+									<option>부서 선택</option>
+									<option value="1">총무</option>
+									<option value="2">재경</option>
+									<option value="3">인사</option>
+									<option value="4">기술지원</option>
+							</select></td>
 						</tr>
 						<tr>
-							<td colspan="4"><textarea class="form-control" rows="30" ></textarea></td>
+							<td colspan="4"><textarea class="form-control" rows="30" name="contents" ></textarea></td>
 						</tr>							
 				</table>
-
-
+				<div>
+					<input type="submit" value="등록"> <input type="button" value="취소">
+				</div>
+				</form>	
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">

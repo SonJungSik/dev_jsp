@@ -37,7 +37,7 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="StaffServlet?command=notice_list">공지사항</a></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
