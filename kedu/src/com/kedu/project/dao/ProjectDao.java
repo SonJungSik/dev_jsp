@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLPermission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class ProjectDao {
 			
 			pstmt.setString(1, pDto.getPjtnm());
 			pstmt.setString(2, pDto.getSite());
-			pstmt.setString(3, pDto.getStartdt());
-			pstmt.setString(4, pDto.getEnddt());
+			pstmt.setString(3, pDto.getStartdt().substring(0, 10));
+			pstmt.setString(4, pDto.getEnddt().substring(0, 10));
 			pstmt.setString(5, pDto.getContents());
 		
 			pstmt.executeUpdate();
@@ -79,8 +80,8 @@ public class ProjectDao {
 				pDto.setPjtid(rs.getInt("pjtid"));
 				pDto.setPjtnm(rs.getString("pjtnm"));
 				pDto.setSite(rs.getString("site"));
-				pDto.setStartdt(rs.getString("startdt"));
-				pDto.setEnddt(rs.getString("enddt"));
+				pDto.setStartdt(rs.getString("startdt").substring(0, 10));
+				pDto.setEnddt(rs.getString("enddt").substring(0, 10));
 				pDto.setContents(rs.getString("contents"));
 				
 				
@@ -93,5 +94,75 @@ public class ProjectDao {
 		}
 		
 		return list;
+	}
+
+	// 프로젝트 상세보기
+	public ProjectDto selectOneProject(int pjtid) {
+		String sql = "select * from project where pjtid = ?";
+		
+		ProjectDto pDto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pjtid);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				pDto = new ProjectDto();
+				
+				pDto.setPjtid(rs.getInt("pjtid"));
+				pDto.setPjtnm(rs.getString("pjtnm"));
+				pDto.setSite(rs.getString("site"));
+				pDto.setStartdt(rs.getString("Startdt").substring(0, 10));
+				pDto.setEnddt(rs.getString("enddt").substring(0, 10));
+				pDto.setContents(rs.getString("contents"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return pDto;
+	}
+
+	public void updateProject(ProjectDto pDto) {
+		String sql = "update project set "
+				+ "  pjtnm=?"
+				+ ", site=?"
+				+ ", startdt=?"
+				+ ", enddt=?"
+				+ ", contents=?"
+				+ " where pjtid=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, pDto.getPjtnm());
+			pstmt.setString(2, pDto.getSite());
+			pstmt.setString(3, pDto.getStartdt().substring(0, 10));
+			pstmt.setString(4, pDto.getEnddt().substring(0, 10));
+			pstmt.setString(5, pDto.getContents());
+			pstmt.setInt(6, pDto.getPjtid());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException  e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
 	}
 }

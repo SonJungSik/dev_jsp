@@ -7,7 +7,10 @@ import com.kedu.notice.action.NoticeUpdateAction;
 import com.kedu.notice.action.NoticeUpdateFormAction;
 import com.kedu.notice.action.NoticeWriteAction;
 import com.kedu.notice.action.NoticeWriteFormAction;
+import com.kedu.project.action.ProjectDetailAction;
 import com.kedu.project.action.ProjectListAction;
+import com.kedu.project.action.ProjectUpdateAction;
+import com.kedu.project.action.ProjectUpdateFormAction;
 import com.kedu.project.action.ProjectWriteAction;
 import com.kedu.project.action.ProjectWriteFormAction;
 import com.kedu.staff.action.LoginAction;
@@ -70,6 +73,12 @@ public class ActionFactory {
 			action = new ProjectWriteAction();
 		} else if (command.equals("project_list")) {
 			action = new ProjectListAction();
+		} else if (command.equals("project_detail")) {
+			action = new ProjectDetailAction();
+		} else if (command.equals("project_update_form")) {
+			action = new ProjectUpdateFormAction();
+		} else if (command.equals("project_update")) {
+			action = new ProjectUpdateAction();
 		}
 		return action;
 	}

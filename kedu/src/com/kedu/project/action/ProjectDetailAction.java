@@ -1,7 +1,6 @@
 package com.kedu.project.action;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,16 +11,19 @@ import com.kedu.common.action.Action;
 import com.kedu.project.dao.ProjectDao;
 import com.kedu.project.dto.ProjectDto;
 
-public class ProjectListAction implements Action {
+public class ProjectDetailAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/project/projectList.jsp";
+		String url = "/project/projectDetail.jsp";
+		
+		int pjtid = Integer.parseInt(request.getParameter("pjtid"));
 		
 		ProjectDao pDao = ProjectDao.getInstance();
 		
-		List<ProjectDto> projectList = pDao.selectAllProject();
-		request.setAttribute("projectList", projectList);
+		ProjectDto pDto = pDao.selectOneProject(pjtid);
+		
+		request.setAttribute("project", pDto);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
