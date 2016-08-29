@@ -109,9 +109,23 @@ public class NoticeDao {
 		}
 		return list;
 	}
-
+	
+	// 공지사항 상세보기
 	public NoticeDto selectOneNotice(String noticeno) {
-		String sql = "select * from notice where noticeno = ?";
+		String sql = "select "
+				+ "s.stfnm,"
+				+ "n.stfid, "
+				+ "n.noticeno, "
+				+ "n.noticetitle, "
+				+ "n.contents, "
+				+ "n.regdt, "
+				+ "n.readcount, "
+				+ "n.deptid, "
+				+ "d.deptnm "
+				+ "from notice n, staff s, departments d where "
+				+ "n.stfid = s.stfid and "
+				+ "n.deptid = d.deptid and "
+				+ "n.noticeno = ?";
 		
 		NoticeDto nDto = null;
 		Connection conn = null;
@@ -129,13 +143,68 @@ public class NoticeDao {
 			if (rs.next()) {
 				nDto = new NoticeDto();
 				
-				
+				nDto.setStfnm(rs.getString("stfnm"));
+				nDto.setStfid(rs.getString("stfid"));
+				nDto.setNoticeno(rs.getInt("noticeno"));
+				nDto.setNoticetitle(rs.getString("noticetitle"));
+				nDto.setContents(rs.getString("contents"));
+				nDto.setRegdt(rs.getString("regdt"));
+				nDto.setReadcount(rs.getInt("readcount"));
+				nDto.setDeptid(rs.getInt("deptid"));
+				nDto.setDeptnm(rs.getString("deptnm"));
 				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
 		}
-		return null;
+		return nDto;
 	}
 	
+	// 게시판 수정
+	public void updateNotice(NoticeDto nDto) {
+		String sql = "update notice set stfid=?, noticetitle = ?, contents = ?, deptid =? "
+				+ "where noticeno = ?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nDto.getStfid());
+			pstmt.setString(2, nDto.getNoticetitle());
+			pstmt.setString(3, nDto.getContents());
+			pstmt.setInt(4, nDto.getDeptid());
+			pstmt.setInt(5, nDto.getNoticeno());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+
+		}
+	}
+
+	// 공지사항 삭제
+	public void deleteNotice(int noticeno) {
+		String sql = "delete notice where noticeno=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, noticeno);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

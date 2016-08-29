@@ -74,7 +74,7 @@
 				</p>
 			</div>
 			<div class="col-sm-8 text-left">
-				<h4>공지사항</h4>
+				<h4>공지사항 등록</h4>
 				<form name="frm" method="post" action="StaffServlet">
 				<input type="hidden" name="command" value="notice_write">
 				<table class="table table-hober">

@@ -20,6 +20,33 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../../css/view.css" rel="stylesheet" type="text/css">
 
+<!-- 달력위한 것듯 -->
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+<script type="text/javascript">
+$( function() {
+    $( "#startdt" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
+    	changeMonth: true,
+    	dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+    	 	
+    });
+    
+    $( "#enddt" ).datepicker({
+    	dateFormat: 'yy-mm-dd',
+    	changeMonth: true,
+    	dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+    	 	
+    });
+});
+</script>
 </head>
 <body>
 
@@ -74,34 +101,50 @@
 				</p>
 			</div>
 			<div class="col-sm-8 text-left">
-			<h3>공지사항</h3>
+				<h4>프로젝트 등록</h4>
+				<form name="frm" method="post" action="StaffServlet">
+				<input type="hidden" name="command" value="project_write">
 				<table class="table table-hober">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>부서명</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- foreach 사용여기에 반복문으로 공지사항 리스트를 출력할수 있게끔 한다 -->
-				<c:forEach var="noticeList" items="${noticeList}">
-				<tr>
-					<td>${noticeList.noticeno }</td>
-					<td><a href="StaffServlet?command=notice_detail&noticeno=${noticeList.noticeno }">${noticeList.noticetitle }</a></td>
-					<td>${noticeList.stfnm }</td>
-					<td>${noticeList.deptnm }</td>
-					<td>${noticeList.regdt }</td>
-					<td>${noticeList.readcount }</td>
-				</tr>
-				
-				</c:forEach>
-				<!--여기까지 반복문  -->
-			</tbody>
-		</table>
+						<tr>
+							<th>프로젝트 명</th>
+							<td colspan="3"><input type="text" class="form-control" name="pjtnm" maxlength="50" ></td>
+						</tr>
+						<tr>
+							<th>제안사</th>
+							<td colspan="3"><input type="text" class="form-control" name="site"></td>
+						</tr>
+						<tr>
+							<th>
+								시작일
+							</th>
+							<td>
+								<input type="text" id="startdt" name="startdt">
+							</td>
+							<th>
+								종료일
+							</th>
+							<td>
+								<input type="text" id="enddt" name="enddt">
+							</td>
+						</tr>
+						<tr>
+							<th>요구스킬</th>
+							<td><input type="checkbox" value="1">JAVA
+								<input type="checkbox" value="2">Servlet/JSP
+								<input type="checkbox" value="3">Sprint/iBatis Framework
+								<input type="checkbox" value="4">HTML5
+								<input type="checkbox" value="5">CSS
+							</td>
+						</tr>
+						<tr>
+							<th>상세내용</th>
+							<td colspan="3"><textarea class="form-control" rows="20" name="contents" ></textarea></td>
+						</tr>							
+				</table>
+				<div align="center">
+					<input type="submit" value="등록"> <input type="button" value="취소">
+				</div>
+				</form>	
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">

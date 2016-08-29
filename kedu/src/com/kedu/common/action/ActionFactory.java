@@ -1,8 +1,15 @@
  package com.kedu.common.action;
 
+import com.kedu.notice.action.NoticeDeleteAction;
+import com.kedu.notice.action.NoticeDetailAction;
 import com.kedu.notice.action.NoticeListAction;
+import com.kedu.notice.action.NoticeUpdateAction;
+import com.kedu.notice.action.NoticeUpdateFormAction;
 import com.kedu.notice.action.NoticeWriteAction;
 import com.kedu.notice.action.NoticeWriteFormAction;
+import com.kedu.project.action.ProjectListAction;
+import com.kedu.project.action.ProjectWriteAction;
+import com.kedu.project.action.ProjectWriteFormAction;
 import com.kedu.staff.action.LoginAction;
 import com.kedu.staff.action.LoginFormAction;
 import com.kedu.staff.action.MainAction;
@@ -49,8 +56,21 @@ public class ActionFactory {
 			action = new NoticeWriteAction();
 		} else if (command.equals("notice_list")) {
 			action = new NoticeListAction();
+		} else if (command.equals("notice_detail")) {
+			action = new NoticeDetailAction();
+		} else if (command.equals("notice_update_form")) {
+			action = new NoticeUpdateFormAction();
+		} else if (command.equals("notice_update")) {
+			action = new NoticeUpdateAction();
+		} else if (command.equals("notice_delete")) {
+			action = new NoticeDeleteAction();
+		} else if (command.equals("project_write_form")) {  // 프로젝트
+			action = new ProjectWriteFormAction();
+		} else if (command.equals("project_write")) {
+			action = new ProjectWriteAction();
+		} else if (command.equals("project_list")) {
+			action = new ProjectListAction();
 		}
-		
 		return action;
 	}
 }

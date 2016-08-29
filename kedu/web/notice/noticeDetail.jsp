@@ -41,9 +41,10 @@
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="StaffServlet?command=staff_write_form">사원 등록</a></li>
+								<li><a href="StaffServlet?command=staff_write_form">사원
+										등록</a></li>
 								<li><a href="StaffServlet?command=staff_list">사원 리스트</a></li>
-								<li><a href="#">여긴 뭐하지	</a></li>
+								<li><a href="#">여긴 뭐하지 </a></li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">프로젝트 <span class="caret"></span></a>
@@ -54,9 +55,8 @@
 							</ul></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><span style="color: white;">${loginUser.stfnm}(${loginUser.stfid})님 안녕하세요 ${loginUser.ismgr }</span><br>
-														
-								</li>
+						<li><span style="color: white;">${loginUser.stfnm}(${loginUser.stfid})님
+								안녕하세요 ${loginUser.ismgr }</span><br></li>
 					</ul>
 				</div>
 			</div>
@@ -76,11 +76,13 @@
 			<div class="col-sm-8 text-left">
 				<h4>공지사항 상세</h4>
 				<form>
-				<input type="hidden" name="command" value="notice_write">
-				<table class="table table-hober ">
+					<input type="hidden" name="command" value="notice_write">
+					<table class="table table-hober ">
 						<tr>
 							<th>제목</th>
-							<td colspan="3"><input type="text" class="form-control" name="noticetitle" maxlength="50" readonly="readonly" >${notice.noticetitle }</td>
+							<td colspan="3"><input type="text" class="form-control"
+								name="noticetitle" maxlength="50" readonly="readonly"
+								value="${notice.noticetitle }"></td>
 						</tr>
 						<tr>
 							<th>작성자</th>
@@ -95,13 +97,17 @@
 							<td>${notice.readcount}</td>
 						</tr>
 						<tr>
-							<td colspan="4" ><textarea class="form-control" rows="30" name="contents" readonly="readonly" >${notice.contents }</textarea></td>
-						</tr>							
-				</table>
-				<div>
-					<input type="submit" value="등록"> <input type="button" value="취소">
-				</div>
-				</form>	
+							<td colspan="4"><textarea class="form-control" rows="30"
+									name="contents" readonly="readonly">${notice.contents }</textarea></td>
+						</tr>
+					</table>
+					<div align="center">
+						<input type="button" value="수정"
+							onclick="location.href='StaffServlet?command=notice_update_form&noticeno=${notice.noticeno}'">
+						<input type="button" value="삭제" onclick="location.href='StaffServlet?command=notice_delete&noticeno=${notice.noticeno}'"> <input type="button"
+							value="목록으로">
+					</div>
+				</form>
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">

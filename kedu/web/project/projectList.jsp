@@ -20,6 +20,8 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../../css/view.css" rel="stylesheet" type="text/css">
 
+
+
 </head>
 <body>
 
@@ -74,28 +76,26 @@
 				</p>
 			</div>
 			<div class="col-sm-8 text-left">
-			<h3>공지사항</h3>
+				<h4>프로젝트 리스트</h4>
 				<table class="table table-hober">
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>부서명</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th>프로젝트명</th>
+					<th>제안사</th>
+					<th>시작일</th>
+					<th>종료일</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- foreach 사용여기에 반복문으로 공지사항 리스트를 출력할수 있게끔 한다 -->
-				<c:forEach var="noticeList" items="${noticeList}">
+				<!-- foreach 사용여기에 반복문으로 프로젝트 리스트를 출력할수 있게끔 한다 -->
+				<c:forEach var="projectList" items="${projectList}">
 				<tr>
-					<td>${noticeList.noticeno }</td>
-					<td><a href="StaffServlet?command=notice_detail&noticeno=${noticeList.noticeno }">${noticeList.noticetitle }</a></td>
-					<td>${noticeList.stfnm }</td>
-					<td>${noticeList.deptnm }</td>
-					<td>${noticeList.regdt }</td>
-					<td>${noticeList.readcount }</td>
+					<td>${projectList.pjtid }</td>
+					<td><a href="StaffServlet?command=project_detail&pjtid=${projectList.pjtid }">${projectList.pjtnm }</a></td>
+					<td>${projectList.site }</td>
+					<td>${projectList.startdt }</td>
+					<td>${projectList.enddt }</td>
 				</tr>
 				
 				</c:forEach>

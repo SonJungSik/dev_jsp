@@ -74,34 +74,72 @@
 				</p>
 			</div>
 			<div class="col-sm-8 text-left">
-			<h3>공지사항</h3>
-				<table class="table table-hober">
-			<thead>
+				<h1>공지사항 수정</h1>
+		<form name="frm" method="post" action="StaffServlet">
+			<input type="hidden" name="command" value="notice_update">
+			<input type="hidden" name="noticeno" value="${notice.noticeno }">
+			<table class="table table-hober">
 				<tr>
-					<th>번호</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>부서명</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<td colspan="3"><input type="text" class="form-control"
+						name="noticetitle" maxlength="50" value="${notice.noticetitle }"></td>
 				</tr>
-			</thead>
-			<tbody>
-				<!-- foreach 사용여기에 반복문으로 공지사항 리스트를 출력할수 있게끔 한다 -->
-				<c:forEach var="noticeList" items="${noticeList}">
 				<tr>
-					<td>${noticeList.noticeno }</td>
-					<td><a href="StaffServlet?command=notice_detail&noticeno=${noticeList.noticeno }">${noticeList.noticetitle }</a></td>
-					<td>${noticeList.stfnm }</td>
-					<td>${noticeList.deptnm }</td>
-					<td>${noticeList.regdt }</td>
-					<td>${noticeList.readcount }</td>
+					<th>작성자</th>
+					<td>${loginUser.stfnm}<input type="hidden" name="stfid"
+						value="${loginUser.stfid}"></td>
+					<th>부서</th>
+					<td><c:choose>
+							<c:when test="${notice.deptid==1 }">
+								<select id="deptid" name="deptid">
+									<option>부서 선택</option>
+									<option value="1" selected="selected">총무</option>
+									<option value="2">재경</option>
+									<option value="3">인사</option>
+									<option value="4">기술지원</option>
+								</select>
+							</c:when>
+							<c:when test="${notice.deptid==2 }">
+								<select id="deptid" name="deptid">
+									<option>부서 선택</option>
+									<option value="1">총무</option>
+									<option value="2" selected="selected">재경</option>
+									<option value="3">인사</option>
+									<option value="4">기술지원</option>
+								</select>
+							</c:when>
+							<c:when test="${notice.deptid==3 }">
+								<select id="deptid" name="deptid">
+									<option>부서 선택</option>
+									<option value="1">총무</option>
+									<option value="2">재경</option>
+									<option value="3" selected="selected">인사</option>
+									<option value="4">기술지원</option>
+								</select>
+							</c:when>
+							<c:when test="${notice.deptid==4 }">
+								<select id="deptid" name="deptid">
+									<option>부서 선택</option>
+									<option value="1">총무</option>
+									<option value="2">재경</option>
+									<option value="3">인사</option>
+									<option value="4" selected="selected">기술지원</option>
+								</select>
+							</c:when>
+							
+						</c:choose></td>
 				</tr>
-				
-				</c:forEach>
-				<!--여기까지 반복문  -->
-			</tbody>
-		</table>
+				<tr>
+					<td colspan="4"><textarea class="form-control" rows="30"
+							name="contents" >${ notice.contents }</textarea></td>
+				</tr>
+			</table>
+			<div>
+				<input type="submit" value="수정"> <input type="button"
+					value="목록" onclick="location.href='StaffServlet?command=notice_list'">
+			</div>
+		</form>
+
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
@@ -111,7 +149,7 @@
 					<p>ADS</p>
 				</div>
 			</div>
-		</div>
+		</div>	
 		<footer class="container-fluid text-center">
 			<p>Footer Text</p>
 		</footer>
