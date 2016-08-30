@@ -14,8 +14,12 @@ public class ReplyWriteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reply_content = request.getParameter("reply_content");
 		String emp_name=request.getParameter("emp_name");
+		String stfid = request.getParameter("stfid");
 		System.out.println("reply_content: " + reply_content);
 		System.out.println("emp_name: " + emp_name);
+		System.out.println("stfid : " + stfid );
+		
+		
 		
 	}		
 

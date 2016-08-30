@@ -76,7 +76,8 @@
 									<td><span class="form-inline" role="form"> <input
 											type="text" id="replyname" name="replyname"
 											class="form-control col-lg-2" data-rule-required="true"
-											placeholder="이름" maxlength="10">
+											placeholder="이름" maxlength="10" value="${loginUser.stfnm }">
+											<input type="hidden" id="stfid" value="${loginUser.stfid }">
 											<button type="button" id="replysubmit" name="replysubmit"
 												class="btn btn-default">확인</button> <textarea
 												id="replycontents" name="replycontents"
@@ -90,11 +91,12 @@
 									$("#replysubmit")
 											.click(
 													function(event) {
-						
-														var pName = $("#replyname");
+														var stfid = $("#stfid");
+														var pName = $("#replyname")
 														var pText = $("#replycontents");
 														var inputData = new Object();
 														//alert(pText.val());
+														inputData.stfid=stfid.val();
 														inputData.emp_name=pName.val();
 														inputData.reply_content=pText.val();
 														
@@ -122,8 +124,6 @@
 															+ '</td>'
 															+ '</tr>';
 
-															console.log(inputData.emp_name);
-															console.log(inputData.reply_content);
 																$.ajax({
 										                        	url:"StaffServlet?command=reply_write",
 										                        	type:"post",
@@ -131,13 +131,13 @@
 										                        	dataType:"json",
 										                        	success: function(result){
 										                        		
-										                        		$('#replytable').append(replytext);
-										                        		$("#replyname").val("");
-																		$("#replycontents").val("");
 										                        	}
 										   
 										                        });		
-														
+
+								                        		$('#replytable').append(replytext);
+								                        		$("#replyname").val("");
+																$("#replycontents").val("");
 														
 														
 														
