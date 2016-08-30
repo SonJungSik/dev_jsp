@@ -24,43 +24,7 @@
 <body>
 
 	<div class="container-fluid text-center">
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Logo</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="StaffServlet?command=notice_list">공지사항</a></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="StaffServlet?command=staff_write_form">사원 등록</a></li>
-								<li><a href="StaffServlet?command=staff_list">사원 리스트</a></li>
-								<li><a href="#">여긴 뭐하지	</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">프로젝트 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">사원 등록</a></li>
-								<li><a href="#">Page 1-2</a></li>
-								<li><a href="#">Page 1-3</a></li>
-							</ul></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><span style="color: white;">${loginUser.stfnm}(${loginUser.stfid})님 안녕하세요 ${loginUser.ismgr }</span><br>
-														
-								</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+		<%@ include file="../header.jsp" %>
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<p>
@@ -80,27 +44,32 @@
 				<hr>
 				<h4>공지사항</h4>
 				<table class="table table-hober">
-					<thead>
-						<tr>
-							<td>번호</td>
-							<td>제목</td>
-							<td>작성자</td>
-							<td>작성일</td>
-							<td>조회수</td>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- foreach 사용여기에 반복문으로 공지사항 리스트를 출력할수 있게끔 한다 -->
-						<tr>
-							<td>111</td>
-							<td>내가 짱이지롱</td>
-							<td>손정식</td>
-							<td>2016.08.06</td>
-							<td>100</td>
-						</tr>
-						<!--여기까지 반복문  -->
-					</tbody>
-				</table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>부서명</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- foreach 사용여기에 반복문으로 공지사항 리스트를 출력할수 있게끔 한다 -->
+				<c:forEach var="noticeList" items="${noticeList}">
+				<tr>
+					<td>${noticeList.noticeno }</td>
+					<td><a href="StaffServlet?command=notice_detail&noticeno=${noticeList.noticeno }">${noticeList.noticetitle }</a></td>
+					<td>${noticeList.stfnm }</td>
+					<td>${noticeList.deptnm }</td>
+					<td>${noticeList.regdt }</td>
+					<td>${noticeList.readcount }</td>
+				</tr>
+				
+				</c:forEach>
+				<!--여기까지 반복문  -->
+			</tbody>
+		</table>
 
 
 			</div>

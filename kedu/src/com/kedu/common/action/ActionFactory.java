@@ -13,6 +13,7 @@ import com.kedu.project.action.ProjectUpdateAction;
 import com.kedu.project.action.ProjectUpdateFormAction;
 import com.kedu.project.action.ProjectWriteAction;
 import com.kedu.project.action.ProjectWriteFormAction;
+import com.kedu.reply.action.ReplyWriteAction;
 import com.kedu.staff.action.LoginAction;
 import com.kedu.staff.action.LoginFormAction;
 import com.kedu.staff.action.MainAction;
@@ -79,6 +80,8 @@ public class ActionFactory {
 			action = new ProjectUpdateFormAction();
 		} else if (command.equals("project_update")) {
 			action = new ProjectUpdateAction();
+		} else if (command.equals("reply_write")) {
+			action = new ReplyWriteAction();
 		}
 		return action;
 	}

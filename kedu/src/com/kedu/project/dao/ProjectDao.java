@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLPermission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,4 +164,71 @@ public class ProjectDao {
 		}
 		
 	}
+	
+	// 페이징 처리를 해보자(총레코드수 반환)
+	public int totalpageProject() {
+		String sql = "select count(*) from project";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int totalRecord = 0;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totalRecord = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return totalRecord;
+	}
+	static int numPerPage = 10; // 한 페이지에서 보일 레코드수
+	static int totalPage = 0;	// 총 페이지수
+
+	// 현재 페이지 구하기
+	public List<ProjectDto> selectCurPageProject(int start, int end) {
+		String sql = "SELECT pjtid, pjtnm, site, startdt, enddt " +
+					"FROM  (SELECT ROWNUM r, a. * FROM (SELECT pjtid, pjtnm, site, startdt, enddt " +
+					" FROM PROJECT ORDER BY pjtid desc) a) WHERE r BETWEEN ? AND ?";
+		
+		List<ProjectDto> list = new ArrayList<ProjectDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProjectDto pDto = new ProjectDto();
+				
+				pDto.setPjtid(rs.getInt("pjtid"));
+				pDto.setPjtnm(rs.getString("pjtnm"));
+				pDto.setSite(rs.getString("site"));
+				pDto.setStartdt(rs.getString("startdt").substring(0, 10));
+				pDto.setEnddt(rs.getString("enddt").substring(0, 10));
+				
+				
+				list.add(pDto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	// 현재 페이지 구하기
+
 }

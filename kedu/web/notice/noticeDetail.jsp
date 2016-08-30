@@ -24,43 +24,7 @@
 <body>
 
 	<div class="container-fluid text-center">
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Logo</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="StaffServlet?command=notice_list">공지사항</a></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">사원 관리 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="StaffServlet?command=staff_write_form">사원
-										등록</a></li>
-								<li><a href="StaffServlet?command=staff_list">사원 리스트</a></li>
-								<li><a href="#">여긴 뭐하지 </a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">프로젝트 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">사원 등록</a></li>
-								<li><a href="#">Page 1-2</a></li>
-								<li><a href="#">Page 1-3</a></li>
-							</ul></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><span style="color: white;">${loginUser.stfnm}(${loginUser.stfid})님
-								안녕하세요 ${loginUser.ismgr }</span><br></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+		<%@ include file="../header.jsp"%>
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<p>
@@ -101,13 +65,100 @@
 									name="contents" readonly="readonly">${notice.contents }</textarea></td>
 						</tr>
 					</table>
+					<!-- 댓글 테이블 -->
+					<div>
+						<div id=replye_view>
+							<table id="replytable" class="table table-condensed"></table>
+						</div>
+						<div id=reply_input>
+							<table class="table table-condensed">
+								<tr>
+									<td><span class="form-inline" role="form"> <input
+											type="text" id="replyname" name="replyname"
+											class="form-control col-lg-2" data-rule-required="true"
+											placeholder="이름" maxlength="10">
+											<button type="button" id="replysubmit" name="replysubmit"
+												class="btn btn-default">확인</button> <textarea
+												id="replycontents" name="replycontents"
+												class="form-control col-lg-12" style="width: 100%" rows="4"></textarea>
+									</span></td>
+								</tr>
+							</table>
+							<script>
+								$(function() {
+
+									$("#replysubmit")
+											.click(
+													function(event) {
+						
+														var pName = $("#replyname");
+														var pText = $("#replycontents");
+														var inputData = new Object();
+														//alert(pText.val());
+														inputData.emp_name=pName.val();
+														inputData.reply_content=pText.val();
+														
+
+														
+
+														if ($.trim(pName.val()) == "") {
+															alert("이름을 입력하세요.");
+															pName.focus();
+															return;
+														} else if ($.trim(pText
+																.val()) == "") {
+															alert("내용을 입력하세요.");
+															pText.focus();
+															return;
+														}
+														var replytext = '<tr>'
+															+ '<td colspan=2>'
+															+ '<strong>'
+															+ pName.val()
+															+ '</strong> '
+															+ ' <a style="cursor:pointer;" name="replytDel">삭제</a><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+															+ pText.val().replace(/\n/g,"<br>")
+															+ '</p>'
+															+ '</td>'
+															+ '</tr>';
+
+															console.log(inputData.emp_name);
+															console.log(inputData.reply_content);
+																$.ajax({
+										                        	url:"StaffServlet?command=reply_write",
+										                        	type:"post",
+										                        	data: inputData,
+										                        	dataType:"json",
+										                        	success: function(result){
+										                        		
+										                        		$('#replytable').append(replytext);
+										                        		$("#replyname").val("");
+																		$("#replycontents").val("");
+										                        	}
+										   
+										                        });		
+														
+														
+														
+														
+														
+
+													});
+
+								});
+							</script>
+						</div>
+					</div>
+					<!-- 댓글 테이블 종료  -->
 					<div align="center">
 						<input type="button" value="수정"
 							onclick="location.href='StaffServlet?command=notice_update_form&noticeno=${notice.noticeno}'">
-						<input type="button" value="삭제" onclick="location.href='StaffServlet?command=notice_delete&noticeno=${notice.noticeno}'"> <input type="button"
-							value="목록으로">
+						<input type="button" value="삭제"
+							onclick="location.href='StaffServlet?command=notice_delete&noticeno=${notice.noticeno}'">
+						<input type="button" value="목록으로">
 					</div>
 				</form>
+
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
