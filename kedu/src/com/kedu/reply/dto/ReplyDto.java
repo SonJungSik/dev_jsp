@@ -1,11 +1,19 @@
 package com.kedu.reply.dto;
 
-public class ReplyeDto {
+public class ReplyDto {
 	private int replyno;
 	private int noticeno;
 	private String stfid;
 	private String regdt;
 	private String contents;
+	private String stfnm;
+	
+	public String getStfnm() {
+		return stfnm;
+	}
+	public void setStfnm(String stfnm) {
+		this.stfnm = stfnm;
+	}
 	public int getReplyno() {
 		return replyno;
 	}

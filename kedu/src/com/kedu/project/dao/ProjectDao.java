@@ -229,6 +229,5 @@ public class ProjectDao {
 		return list;
 	}
 	
-	// 현재 페이지 구하기
 
 }

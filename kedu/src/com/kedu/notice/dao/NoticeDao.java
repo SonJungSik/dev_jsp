@@ -45,7 +45,7 @@ public class NoticeDao {
 		}
 	}
 
-	public void updateReadCount(String noticeno) {
+	public void updateReadCount(int noticeno) {
 		String sql = "update notice set readcount=readcount+1 where noticeno=?";
 
 		Connection conn = null;
@@ -55,7 +55,7 @@ public class NoticeDao {
 			conn = DBManager.getConnection();
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, noticeno);
+			pstmt.setInt(1, noticeno);
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -103,7 +103,7 @@ public class NoticeDao {
 	}
 
 	// 공지사항 상세보기
-	public NoticeDto selectOneNotice(String noticeno) {
+	public NoticeDto selectOneNotice(int noticeno) {
 		String sql = "select " + "s.stfnm," + "n.stfid, " + "n.noticeno, " + "n.noticetitle, " + "n.contents, "
 				+ "n.regdt, " + "n.readcount, " + "n.deptid, " + "d.deptnm "
 				+ "from notice n, staff s, departments d where " + "n.stfid = s.stfid and " + "n.deptid = d.deptid and "
@@ -118,7 +118,7 @@ public class NoticeDao {
 			conn = DBManager.getConnection();
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, noticeno);
+			pstmt.setInt(1, noticeno);
 
 			rs = pstmt.executeQuery();
 

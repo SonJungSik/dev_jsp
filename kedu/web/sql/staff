@@ -85,4 +85,70 @@ create table project (
 drop sequence pjt_seq;
 create sequence pjt_seq start with 1 increment by 1;
 
+drop table reply;
+create table reply (
+	  replyno 		number
+	, noticeno 		number
+	, stfid 		varchar2(30)
+	, regdt 		date 	default 	sysdate
+	, contents 		varchar2(1000)
+);
+
+drop sequence reply_seq;
+create sequence reply_seq start with 1 increment by 1;
+
+drop table sekill;
+create table skill (
+	  skillno 		number
+	, skilltitle 	varchar2(30)
+);
+
+INSERT INTO skill VALUES(1,'JavaScript');
+INSERT INTO skill VALUES(2,'JQuery');
+INSERT INTO skill VALUES(3,'JSP');
+INSERT INTO skill VALUES(4,'PHP');
+INSERT INTO skill VALUES(5,'Python');
+INSERT INTO skill VALUES(6,'Perl');
+INSERT INTO skill VALUES(7,'Shell');
+INSERT INTO skill VALUES(8,'R');
+INSERT INTO skill VALUES(9,'Scala');
+INSERT INTO skill VALUES(10,'Haskell');
+INSERT INTO skill VALUES(11,'Matlab');
+INSERT INTO skill VALUES(12,'Visual Basic');
+INSERT INTO skill VALUES(13,'Clojure');
+INSERT INTO skill VALUES(14,'Groovy');
+INSERT INTO skill VALUES(15,'XML');
+INSERT INTO skill VALUES(16,'Assembly');
+INSERT INTO skill VALUES(17,'Fortran');
+INSERT INTO skill VALUES(18,'Ruby');
+INSERT INTO skill VALUES(19,'Servlet');
+INSERT INTO skill VALUES(20,'HTML');
+INSERT INTO skill VALUES(21,'CSS');
+INSERT INTO skill VALUES(22,'Node.JS');
+INSERT INTO skill VALUES(23,'Oracle');
+INSERT INTO skill VALUES(24,'Mysql');
+INSERT INTO skill VALUES(25,'Mssql');
+INSERT INTO skill VALUES(26,'MongoDB');
+INSERT INTO skill VALUES(27,'Django');
+INSERT INTO skill VALUES(28,'C');
+INSERT INTO skill VALUES(29,'C++');
+INSERT INTO skill VALUES(30,'C#');
+INSERT INTO skill VALUES(31,'Object-C');
+INSERT INTO skill VALUES(32,'Android');
+INSERT INTO skill VALUES(33,'IOS');
+INSERT INTO skill VALUES(34,'Swift');
+INSERT INTO skill VALUES(35,'Go');
+
+commit;
+
+CREATE TABLE zipcode(
+	ZIPCODE		VARCHAR2(7),
+  SIDO			VARCHAR2(10),
+  GUGUN			VARCHAR2(30),
+  DONG			VARCHAR2(40),
+  RI				VARCHAR2(30),
+  BLDG			VARCHAR2(70),
+  BUNGI			VARCHAR2(20),
+  SEQ				VARCHAR2(6) PRIMARY KEY
+);
 

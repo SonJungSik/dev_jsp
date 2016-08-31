@@ -17,7 +17,7 @@ public class NoticeUpdateFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/notice/noticeUpdate.jsp";
 		
-		String noticeno = request.getParameter("noticeno");
+		int noticeno = Integer.parseInt(request.getParameter("noticeno"));
 
 		NoticeDao nDao = NoticeDao.getInstance();
 		

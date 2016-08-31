@@ -70,7 +70,7 @@
 <body>
 
 	<div class="container-fluid text-center">
-		<%@ include file="../header.jsp" %>
+		<%@ include file="../header.jsp"%>
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<p>
@@ -118,7 +118,79 @@
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td><input type="text" name="address"></td>
+							<td><input type="text" name="address">
+								<button type="button" class="btn btn-sm" data-toggle="modal"
+									data-target="#myModal">주소 검색</button> <!-- Modal 시작 -->
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog">
+										<!-- Modal content-->
+										<div class="modal-content">
+											찾고자 하는 주소의 "동(읍/면/동)"을 입력하여 주세요. <br> 동이름 <input
+												type="text" name="dong" id="dong"> <input
+												type="button" value="확인" id="dongsubmit">
+											<table id="dongtable">
+
+											</table>
+											<script>
+												$(function() {
+
+													$("#dongsubmit")
+															.click(
+																	function(
+																			event) {
+																		var dong = $("#dong");
+																		var inputData = new Object();
+																		//alert(pText.val());
+																		inputData.dong = dong
+																				.val();
+
+																		if ($
+																				.trim(dong
+																						.val()) == "") {
+																			alert("동/읍/면을 입력하세요.");
+																			pName
+																					.focus();
+																			return;
+																		}
+
+																		var dongtext = '<tr>'
+																				+ '<td>'
+
+																				+ '</td>'
+																				+ '</tr>';
+
+																		$
+																				.ajax({
+																					url : "StaffServlet?command=zipcode_list",
+																					type : "post",
+																					data : inputData,
+																					dataType : "json",
+																					success : function(
+																							result) {
+																						for (var index = 0; index < result.length; index++) {
+																							var jsonObject = JSON
+																									.stringify(result[index]);
+																							var json = JSON.parse(jsonObject);
+
+																							console.log(json.dong);
+																						}
+																					}
+																				});
+																		$(
+																				'#dongtable')
+																				.append(
+																						dongtext);
+																		$(
+																				"#dong")
+																				.val(
+																						"");
+																	});
+												});
+											</script>
+										</div>
+
+									</div>
+								</div> <!-- 모달끝 --></td>
 						</tr>
 						<tr>
 							<th>상세주소</th>
@@ -160,12 +232,11 @@
 							<td><input id="entrydt" name="entrydt" type="text">
 							</td>
 						</tr>
-					 	<tr>
+						<tr>
 							<th>관리자 여부</th>
-							<td><input type="radio" name="ismgr" value="N" checked="checked"> 일반사원
-								<input type="radio" name="ismgr" value="Y"> 관리자
-							
-							</td>
+							<td><input type="radio" name="ismgr" value="N"
+								checked="checked"> 일반사원 <input type="radio" name="ismgr"
+								value="Y"> 관리자</td>
 						</tr>
 					</table>
 					<div style="text-align: center">

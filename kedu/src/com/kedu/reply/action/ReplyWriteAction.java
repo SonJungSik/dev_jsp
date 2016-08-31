@@ -7,17 +7,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kedu.common.action.Action;
+import com.kedu.reply.dao.ReplyDao;
+import com.kedu.reply.dto.ReplyDto;
 
 public class ReplyWriteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reply_content = request.getParameter("reply_content");
-		String emp_name=request.getParameter("emp_name");
+		String contents = request.getParameter("contents");
 		String stfid = request.getParameter("stfid");
-		System.out.println("reply_content: " + reply_content);
-		System.out.println("emp_name: " + emp_name);
-		System.out.println("stfid : " + stfid );
+		int noticeno = Integer.parseInt(request.getParameter("noticeno"));
+		
+		ReplyDto rDto = new ReplyDto();
+		rDto.setStfid(request.getParameter("stfid"));
+		rDto.setNoticeno(Integer.parseInt(request.getParameter("noticeno")));
+		rDto.setContents(request.getParameter("contents"));
+		
+		ReplyDao rDao = ReplyDao.getInstance();
+		rDao.insertReply(rDto);
+		
+		
+		System.out.println(contents);
+		System.out.println(stfid);
+		System.out.println(noticeno);
 		
 		
 		

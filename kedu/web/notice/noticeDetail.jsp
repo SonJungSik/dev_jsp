@@ -68,7 +68,20 @@
 					<!-- 댓글 테이블 -->
 					<div>
 						<div id=replye_view>
-							<table id="replytable" class="table table-condensed"></table>
+							<table id="replytable" class="table table-condensed">
+							<!-- 댓글 자리 -->
+							<c:forEach items="${replyList }" var="replyList">
+								<tr>
+									<td colspan=2>
+										<strong> ${replyList.stfnm }</strong>
+										<a style="cursor:pointer;"  name="replytDel" > 삭제</a>
+										<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															${replyList.contents } <br>
+										</p>
+									</td>
+								</tr>
+							</c:forEach>
+							</table>
 						</div>
 						<div id=reply_input>
 							<table class="table table-condensed">
@@ -78,6 +91,7 @@
 											class="form-control col-lg-2" data-rule-required="true"
 											placeholder="이름" maxlength="10" value="${loginUser.stfnm }">
 											<input type="hidden" id="stfid" value="${loginUser.stfid }">
+											<input type="hidden" id="noticeno" value="${notice.noticeno }">
 											<button type="button" id="replysubmit" name="replysubmit"
 												class="btn btn-default">확인</button> <textarea
 												id="replycontents" name="replycontents"
@@ -94,13 +108,13 @@
 														var stfid = $("#stfid");
 														var pName = $("#replyname")
 														var pText = $("#replycontents");
+														var noticeno = $("#noticeno");
 														var inputData = new Object();
 														//alert(pText.val());
 														inputData.stfid=stfid.val();
-														inputData.emp_name=pName.val();
-														inputData.reply_content=pText.val();
-														
-
+														inputData.contents=pText.val();
+														inputData.noticeno=noticeno.val();
+	
 														
 
 														if ($.trim(pName.val()) == "") {
@@ -130,21 +144,12 @@
 										                        	data: inputData,
 										                        	dataType:"json",
 										                        	success: function(result){
-										                        		
 										                        	}
-										   
 										                        });		
-
 								                        		$('#replytable').append(replytext);
 								                        		$("#replyname").val("");
 																$("#replycontents").val("");
-														
-														
-														
-														
-
 													});
-
 								});
 							</script>
 						</div>

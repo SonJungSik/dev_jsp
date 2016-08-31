@@ -22,6 +22,7 @@ import com.kedu.staff.action.StaffUpdateAction;
 import com.kedu.staff.action.StaffUpdateFormAction;
 import com.kedu.staff.action.StaffWriteAction;
 import com.kedu.staff.action.StaffWriteFormAction;
+import com.kedu.zipcode.action.ZipcodeListAction;
 
 public class ActionFactory {
 	private static ActionFactory instance = new ActionFactory();
@@ -82,6 +83,8 @@ public class ActionFactory {
 			action = new ProjectUpdateAction();
 		} else if (command.equals("reply_write")) {
 			action = new ReplyWriteAction();
+		} else if (command.equals("zipcode_list")) {
+			action = new ZipcodeListAction();
 		}
 		return action;
 	}
