@@ -71,7 +71,9 @@ $( function() {
 				<table class="table table-hober">
 						<tr>
 							<th>프로젝트 명</th>
-							<td colspan="3"><input type="text" class="form-control" name="pjtnm" maxlength="50" ></td>
+							<td><input type="text" class="form-control" name="pjtnm" maxlength="50" ></td>
+							<th>프로젝트 번호</th>
+							<td><input type="text" class="form-control" name="pjtid" maxlength="50" value="${getPjtid.pjtid }" ></td>
 						</tr>
 						<tr>
 							<th>제안사</th>
@@ -92,13 +94,17 @@ $( function() {
 							</td>
 						</tr>
 						<tr>
-							<th>요구스킬</th>
-							<td><input type="checkbox" value="1">JAVA
-								<input type="checkbox" value="2">Servlet/JSP
-								<input type="checkbox" value="3">Sprint/iBatis Framework
-								<input type="checkbox" value="4">HTML5
-								<input type="checkbox" value="5">CSS
-							</td>
+						<th>
+							요구스킬
+						</th>
+						<td colspan="3">
+						<c:forEach var="skillList" items="${skillList}">
+										<span style="display:inline-block; width: 100px;">
+										<input type="checkbox" value="${skillList.skillno}" name="skill"> ${skillList.skilltitle}	
+										</span>	
+							<c:if test="${skillList.skillno%8 == 0}"><br></c:if>
+						</c:forEach>
+						</td>
 						</tr>
 						<tr>
 							<th>상세내용</th>

@@ -93,13 +93,20 @@ $( function() {
 							</td>
 						</tr>
 						<tr>
-							<th>요구스킬</th>
-							<td><input type="checkbox" value="1">JAVA
-								<input type="checkbox" value="2">Servlet/JSP
-								<input type="checkbox" value="3">Sprint/iBatis Framework
-								<input type="checkbox" value="4">HTML5
-								<input type="checkbox" value="5">CSS
-							</td>
+						<th>
+							요구스킬
+						</th>
+						<td colspan="3">
+						<c:forEach var="skillList" items="${skillList}">
+							<c:forEach var="skillCheck" items="${skillCheck }">
+									<c:if test="${skillCheck.skillno == skillList.skillno}">
+										<span style="display:inline-block; width: 100px;">
+										${skillList.skilltitle}	
+										</span>	
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+						</td>
 						</tr>
 						<tr>
 							<th>상세내용</th>

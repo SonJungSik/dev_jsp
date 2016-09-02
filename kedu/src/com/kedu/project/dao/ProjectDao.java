@@ -20,6 +20,32 @@ public class ProjectDao {
 	public static ProjectDao getInstance() {
 		return instance;
 	}
+	public ProjectDto getPjtid(){
+		String sql = "SELECT project_SEQ  FROM dual";
+		ProjectDto pDto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				pDto = new ProjectDto();
+				
+				pDto.setPjtid(rs.getString("project_SEQ"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return pDto;
+	}
 	
 	// 프로젝트 등록
 	public void insertProject(ProjectDto pDto) {
@@ -31,7 +57,7 @@ public class ProjectDao {
 				+ ", enddt"
 				+ ", contents)"
 				+ " values("
-				+ " pjt_seq.nextval"
+				+ " ?"
 				+ ", ?"
 				+ ", ?"
 				+ ", ?"
@@ -44,12 +70,12 @@ public class ProjectDao {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, pDto.getPjtnm());
-			pstmt.setString(2, pDto.getSite());
-			pstmt.setString(3, pDto.getStartdt().substring(0, 10));
-			pstmt.setString(4, pDto.getEnddt().substring(0, 10));
-			pstmt.setString(5, pDto.getContents());
+			pstmt.setString(1, pDto.getPjtid());
+			pstmt.setString(2, pDto.getPjtnm());
+			pstmt.setString(3, pDto.getSite());
+			pstmt.setString(4, pDto.getStartdt().substring(0, 10));
+			pstmt.setString(5, pDto.getEnddt().substring(0, 10));
+			pstmt.setString(6, pDto.getContents());
 		
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -76,7 +102,7 @@ public class ProjectDao {
 			while(rs.next()) {
 				ProjectDto pDto = new ProjectDto();
 				
-				pDto.setPjtid(rs.getInt("pjtid"));
+				pDto.setPjtid(rs.getString("pjtid"));
 				pDto.setPjtnm(rs.getString("pjtnm"));
 				pDto.setSite(rs.getString("site"));
 				pDto.setStartdt(rs.getString("startdt").substring(0, 10));
@@ -96,7 +122,7 @@ public class ProjectDao {
 	}
 
 	// 프로젝트 상세보기
-	public ProjectDto selectOneProject(int pjtid) {
+	public ProjectDto selectOneProject(String pjtid) {
 		String sql = "select * from project where pjtid = ?";
 		
 		ProjectDto pDto = null;
@@ -108,14 +134,14 @@ public class ProjectDao {
 			conn = DBManager.getConnection();
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pjtid);
+			pstmt.setString(1, pjtid);
 			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
 				pDto = new ProjectDto();
 				
-				pDto.setPjtid(rs.getInt("pjtid"));
+				pDto.setPjtid(rs.getString("pjtid"));
 				pDto.setPjtnm(rs.getString("pjtnm"));
 				pDto.setSite(rs.getString("site"));
 				pDto.setStartdt(rs.getString("Startdt").substring(0, 10));
@@ -154,7 +180,7 @@ public class ProjectDao {
 			pstmt.setString(3, pDto.getStartdt().substring(0, 10));
 			pstmt.setString(4, pDto.getEnddt().substring(0, 10));
 			pstmt.setString(5, pDto.getContents());
-			pstmt.setInt(6, pDto.getPjtid());
+			pstmt.setString(6, pDto.getPjtid());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException  e) {
@@ -213,7 +239,7 @@ public class ProjectDao {
 			while(rs.next()) {
 				ProjectDto pDto = new ProjectDto();
 				
-				pDto.setPjtid(rs.getInt("pjtid"));
+				pDto.setPjtid(rs.getString("pjtid"));
 				pDto.setPjtnm(rs.getString("pjtnm"));
 				pDto.setSite(rs.getString("site"));
 				pDto.setStartdt(rs.getString("startdt").substring(0, 10));

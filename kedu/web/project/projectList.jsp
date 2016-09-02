@@ -67,7 +67,6 @@
 			</tbody>
 		</table>
 		<div>
-			페이징 장소
 			<c:if test="${pageDto.prevPage>0}">
 				<span><a href="StaffServlet?command=project_list&curPage=${pageDto.prevPage}">이전</a></span>
 			</c:if>

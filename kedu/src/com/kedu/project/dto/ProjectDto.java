@@ -1,17 +1,17 @@
 package com.kedu.project.dto;
 
 public class ProjectDto {
-	private int pjtid;
+	private String pjtid;
 	private String pjtnm;
 	private String site;
 	private String startdt;
 	private String enddt;
 	private String contents;
 	
-	public int getPjtid() {
+	public String getPjtid() {
 		return pjtid;
 	}
-	public void setPjtid(int pjtid) {
+	public void setPjtid(String pjtid) {
 		this.pjtid = pjtid;
 	}
 	public String getPjtnm() {

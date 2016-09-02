@@ -19,7 +19,7 @@ public class ZipcodeDao {
 	
 	public List<ZipcodeDto> searchKeyDong(String dongName) {
 		
-		String sql = "select * from zipcode where dong like '%'||?||'%'";
+		String sql = "select zipcode, sido, gugun, dong, nvl(ri, ' ') ri, nvl(bldg, ' ') bldg, nvl(bungi, ' ') bungi, seq  from zipcode where dong like '%'||?||'%'";
 		
 		List<ZipcodeDto> list = new ArrayList<ZipcodeDto>();
 		Connection conn = null;
@@ -30,7 +30,6 @@ public class ZipcodeDao {
     		conn = DBManager.getConnection();
      		pstmt = conn.prepareStatement(sql);
      		
-     		System.out.println("dongName : " + dongName);
      		pstmt.setString(1, dongName);
     		
     		rs = pstmt.executeQuery();
@@ -45,7 +44,7 @@ public class ZipcodeDao {
     			zDto.setDong(rs.getString("dong"));
     			zDto.setRi(rs.getString("ri"));
     			zDto.setBldg(rs.getString("bldg"));
-    			zDto.setBunji(rs.getString("bungi"));
+    			zDto.setBungi(rs.getString("bungi"));
     			zDto.setSeq(rs.getString("seq"));
     			
     			System.out.println(zDto);

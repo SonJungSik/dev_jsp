@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
 <script type="text/javascript">
 $( function() {
+ 	var chkbox = $("#skillchk input[type='checkbox']");
+	skillChk();
     $( "#startdt" ).datepicker({
     	dateFormat: 'yy-mm-dd',
     	changeMonth: true,
@@ -45,6 +47,37 @@ $( function() {
     	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
     	 	
     });
+    
+    var skillcheck = $("#skillcheck :checkbox").map(function(){
+    	return this.value;
+    }).get();
+    
+  	
+    for(var i=0; i<skillcheck.length;i++)
+    {
+   		console.log(skillcheck[i]); 	
+   	}
+    function skillChk(){
+    	$.ajax({
+    		url:"StaffServlet",
+    		data: {"command": "skillChk", "pjtid":$("#pjtid").val()},
+    		type: "get",
+    		dataType: "json",
+    		success: function(result){
+    			$(result).each(function(i, list){
+    				$(list).each(function(k, dto){
+	   					for(var j=0; j<chkbox.length;j++){
+	   						if(chkbox.eq(j).val()==dto.skillno){
+	   							alert("dfdf");
+	   							chkbox.eq(j).prop("checked","true");	
+    					}
+					}
+    				});
+    			});
+    		}
+    		
+    	});
+    }
 });
 </script>
 </head>
@@ -64,11 +97,12 @@ $( function() {
 					<a href="#">Link</a>
 				</p>
 			</div>
+			
 			<div class="col-sm-8 text-left">
-				<h4>프로젝트 등록</h4>
+				<h4>프로젝트 수정</h4>
 				<form name="frm" method="post" action="StaffServlet">
 				<input type="hidden" name="command" value="project_update">
-				<input type="hidden" name="pjtid" value="${project.pjtid }">
+				<input type="hidden" name="pjtid" id="pjtid" value="${project.pjtid }">
 				<table class="table table-hober">
 						<tr>
 							<th>프로젝트 명</th>
@@ -93,13 +127,17 @@ $( function() {
 							</td>
 						</tr>
 						<tr>
-							<th>요구스킬</th>
-							<td><input type="checkbox" value="1">JAVA
-								<input type="checkbox" value="2">Servlet/JSP
-								<input type="checkbox" value="3">Sprint/iBatis Framework
-								<input type="checkbox" value="4">HTML5
-								<input type="checkbox" value="5">CSS
-							</td>
+						<th>
+							요구스킬
+						</th>
+						<td colspan="3" id="skillchk">
+						<c:forEach var="skillList" items="${skillList}">
+										<span style="display:inline-block; width: 100px;">
+										<input type="checkbox" value="${skillList.skillno}" name="skill"> ${skillList.skilltitle}	
+										</span>	
+							<c:if test="${skillList.skillno%8 == 0}"><br></c:if>
+						</c:forEach>
+						</td>
 						</tr>
 						<tr>
 							<th>상세내용</th>

@@ -21,6 +21,46 @@ public class StaffDao {
 		return instance;
 	}
 	
+	// 채번 가져오기
+	public StaffDto getStfid() {
+		String sql = "SELECT DECODE("
+				+ "					SUBSTR(MAX(stfid), 1, 8)"
+				+ "					, TO_CHAR(SYSDATE,'yyyyMM')"
+				+ "					, MAX(stfid)+1, TO_CHAR(SYSDATE, 'yyyyMM') || '0001') "
+				+ "					  AS stfid FROM STAFF "
+				+ "				    	WHERE stfid < TO_CHAR(SYSDATE, 'yyyyMM')||'9999' AND ROWNUM = 1";
+	
+		StaffDto sDto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				sDto = new StaffDto();
+				
+				sDto.setStfid(rs.getString("stfid"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return sDto;
+		
+		
+	}
+	
+	
+	
 	// 사원 등록 기본정보
 	public void insertStaff(StaffDto sDto) {
 		String sql = "insert into staff("

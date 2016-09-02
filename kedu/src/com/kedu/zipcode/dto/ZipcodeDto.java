@@ -8,7 +8,7 @@ public class ZipcodeDto {
     private String dong;
     private String ri;
     private String bldg;
-    private String bunji;
+    private String bungi;
 	
     public String getSeq() {
 		return seq;
@@ -52,11 +52,11 @@ public class ZipcodeDto {
 	public void setBldg(String bldg) {
 		this.bldg = bldg;
 	}
-	public String getBunji() {
-		return bunji;
+	public String getBungi() {
+		return bungi;
 	}
-	public void setBunji(String bunji) {
-		this.bunji = bunji;
+	public void setBungi(String bungi) {
+		this.bungi = bungi;
 	}
     
     

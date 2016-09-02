@@ -74,7 +74,7 @@ create sequence notice_seq start with 1 increment by 1;
 drop table project;
 
 create table project (
-	  pjtid 		number
+	  pjtid 		varchar2(30)
 	, pjtnm 		varchar2(100)
 	, site 			varchar2(100)
 	, startdt 		date
@@ -97,7 +97,7 @@ create table reply (
 drop sequence reply_seq;
 create sequence reply_seq start with 1 increment by 1;
 
-drop table sekill;
+drop table skill;
 create table skill (
 	  skillno 		number
 	, skilltitle 	varchar2(30)
@@ -146,9 +146,16 @@ CREATE TABLE zipcode(
   SIDO			VARCHAR2(10),
   GUGUN			VARCHAR2(30),
   DONG			VARCHAR2(40),
-  RI				VARCHAR2(30),
+  RI			VARCHAR2(30),
   BLDG			VARCHAR2(70),
   BUNGI			VARCHAR2(20),
   SEQ				VARCHAR2(6) PRIMARY KEY
+);
+
+drop table pjtskill;
+
+create table pjtskill (
+	  pjtid		varchar2(30)
+	, skillno	number
 );
 

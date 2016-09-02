@@ -16,7 +16,7 @@ public class ProjectUpdateAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProjectDto pDto = new ProjectDto();
 		
-		pDto.setPjtid(Integer.parseInt(request.getParameter("pjtid")));
+		pDto.setPjtid(request.getParameter("pjtid"));
 		pDto.setPjtnm(request.getParameter("pjtnm"));
 		pDto.setSite(request.getParameter("site"));
 		pDto.setStartdt(request.getParameter("startdt"));
