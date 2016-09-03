@@ -18,6 +18,7 @@ import com.kedu.skill.action.SkillChkAction;
 import com.kedu.staff.action.LoginAction;
 import com.kedu.staff.action.LoginFormAction;
 import com.kedu.staff.action.MainAction;
+import com.kedu.staff.action.StaffDetailFormAction;
 import com.kedu.staff.action.StaffListAction;
 import com.kedu.staff.action.StaffUpdateAction;
 import com.kedu.staff.action.StaffUpdateFormAction;
@@ -88,6 +89,8 @@ public class ActionFactory {
 			action = new ZipcodeListAction();
 		} else if (command.equals("skillChk")){
 			action = new SkillChkAction();
+		} else if (command.equals("staff_detail_form")) {
+			action = new StaffDetailFormAction();
 		}
 		return action;
 	}

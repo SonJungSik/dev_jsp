@@ -190,14 +190,9 @@ public class NoticeDao {
 	}
 
 	public List<NoticeDto> selectMainNotice() {
-		String sql = "select n.noticeno" 
-					+ ", n.noticetitle " 
-					+ ", s.stfnm " 
-					+ ", d.deptnm " 
-					+ ", n.regdt "
-					+ ", n.readcount " 
-					+ " FROM STAFF s, DEPARTMENTS d, NOTICE n " + "WHERE n.STFID = s.STFID "
-					+ " AND d.DEPTID = n.DEPTID " + " order by n.noticeno desc";
+		String sql = "select n.noticeno" + ", n.noticetitle " + ", s.stfnm " + ", d.deptnm " + ", n.regdt "
+				+ ", n.readcount " + " FROM STAFF s, DEPARTMENTS d, NOTICE n " + "WHERE n.STFID = s.STFID "
+				+ " AND d.DEPTID = n.DEPTID " + " order by n.noticeno desc";
 
 		List<NoticeDto> list = new ArrayList<NoticeDto>();
 		Connection conn = null;

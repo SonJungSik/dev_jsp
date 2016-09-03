@@ -68,7 +68,6 @@ $( function() {
     				$(list).each(function(k, dto){
 	   					for(var j=0; j<chkbox.length;j++){
 	   						if(chkbox.eq(j).val()==dto.skillno){
-	   							alert("dfdf");
 	   							chkbox.eq(j).prop("checked","true");	
     					}
 					}

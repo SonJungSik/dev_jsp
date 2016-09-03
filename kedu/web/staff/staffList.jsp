@@ -48,7 +48,8 @@
 							<th>부서</th>
 							<th>전화번호</th>
 							<th>입사일</th>
-							<th>수정</th>
+							<th>상세정보입력</th>
+							<th>사원정보수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,6 +62,7 @@
 							<td>${staffList.deptnm }</td>
 							<td>${staffList.phone }</td>
 							<td>${staffList.entrydt }</td>
+							<td><a href="StaffServlet?command=staff_detail_form&stfid=${staffList.stfid}">입력</a></td>
 							<td><a href="StaffServlet?command=staff_update_form&stfid=${staffList.stfid }">수정</a></td>
 						</tr>
 						</c:forEach>

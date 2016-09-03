@@ -222,48 +222,7 @@
                                     <div style="text-align: center">
                                         <input type="submit" value="등록"> <input type="button" value="취소">
                                     </div>
-                                    <h4>상세정보 입력</h4>
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#home">학력사항</a></li>
-                                        <li><a data-toggle="tab" href="#menu1">경력사항</a></li>
-                                        <li><a data-toggle="tab" href="#menu2">자격증</a></li>
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div id="home" class="tab-pane fade in active">
-                                            <table class="table table-hober table-condensed">
-                                                <tr>
-                                                    <th>학교명</th>
-                                                    <th>입학일자</th>
-                                                    <th>졸업일자</th>
-                                                    <th>전공</th>
-                                                    <th>졸업구분</th>
-                                                    <th>성적</th>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div id="menu1" class="tab-pane fade">
-                                            <table class="table table-hober table-condensed">
-                                                <tr>
-                                                    <th>직장명</th>
-                                                    <th>입사일</th>
-                                                    <th>퇴사일</th>
-                                                    <th>최종직위</th>
-                                                    <th>담당업무</th>
-                                                    <th>월급여</th>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div id="menu2" class="tab-pane fade">
-                                            <table class="table table-hober table-condensed">
-                                                <tr>
-                                                    <th>자격증명</th>
-                                                    <th>자격증번호</th>
-                                                    <th>취득일</th>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    
 
                                 </form>
 
