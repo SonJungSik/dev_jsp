@@ -251,6 +251,8 @@ public class ProjectDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
 		}
 		return list;
 	}

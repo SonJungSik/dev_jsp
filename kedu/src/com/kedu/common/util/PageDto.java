@@ -6,7 +6,23 @@ public class PageDto {
 	private int prevPage;
 	private int nextPage;
 	private int isEmpty;
+	private String keyField;
+	private String keyWord;
 	
+	
+	
+	public String getKeyField() {
+		return keyField;
+	}
+	public void setKeyField(String keyField) {
+		this.keyField = keyField;
+	}
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
 	public int getIsEmpty() {
 		return isEmpty;
 	}

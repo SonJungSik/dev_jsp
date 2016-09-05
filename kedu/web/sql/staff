@@ -159,3 +159,23 @@ create table pjtskill (
 	, skillno	number
 );
 
+
+drop table academi;
+
+create table academi (
+	  stfid 	varchar2(30)
+	, acaid 	number
+	, acanm 	varchar2(30)
+	, entdt 	date
+	, grddt 	date
+	, major 	varchar2(30)
+	, grd_yn	varchar2(10)
+	, grade 	number
+	, regdt 	date 		default sysdate
+	, regnm 	varchar2(30)
+);
+
+drop sequence aca_seq;
+
+CREATE SEQUENCE aca_seq START WITH 1 INCREMENT BY 1;
+

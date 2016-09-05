@@ -38,6 +38,7 @@
                             ]
 
                         });
+                        <!-- 달력 끝 -->
                         /* 이미지 미리보기*/
                         function readURL(input) {
                             if (input.files && input.files[0]) {
@@ -61,7 +62,7 @@
 
                     });
                 </script>
-                <!-- 달력 끝 -->
+                
                 <link href="../../css/view.css" rel="stylesheet" type="text/css">
 
             </head>

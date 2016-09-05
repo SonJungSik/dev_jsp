@@ -23,12 +23,7 @@ public class StaffDao {
 	
 	// 채번 가져오기
 	public StaffDto getStfid() {
-		String sql = "SELECT DECODE("
-				+ "					SUBSTR(MAX(stfid), 1, 8)"
-				+ "					, TO_CHAR(SYSDATE,'yyyyMM')"
-				+ "					, MAX(stfid)+1, TO_CHAR(SYSDATE, 'yyyyMM') || '0001') "
-				+ "					  AS stfid FROM STAFF "
-				+ "				    	WHERE stfid < TO_CHAR(SYSDATE, 'yyyyMM')||'9999' AND ROWNUM = 1";
+		String sql = "SELECT TO_CHAR(SYSDATE,'RRRRMM')||LTRIM(TO_CHAR(SUBSTR(NVL(MAX(stfid),'0000000000'),9,4)+1,'0000'),' ') stfid FROM STAFF";
 	
 		StaffDto sDto = null;
 		Connection conn = null;
@@ -307,4 +302,147 @@ public class StaffDao {
 		
 		return sDto;
 	}
+
+	public int totalPageStaff(String keyField, String keyWord) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			if(keyWord == null || "".equals(keyWord.trim())) {
+				sql =     "select count(*) "
+						+ "from departments d, staff s, jobs j "
+						+ "where d.deptid = s.deptid "
+						+ "and j.jobid=s.jobid";
+				
+				pstmt = conn.prepareStatement(sql);
+			} else {
+				sql =     "select count(*) "
+						+ "  from departments d, staff s, jobs j "
+						+ " where d.deptid = s.deptid and j.jobid=s.jobid "
+						+ "   and " + keyField + " like ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord+"%");
+			}
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		
+		
+		return count;
+	}
+	
+	public List<StaffDto> selectCurPageStaff(int start, int end, String keyField, String keyWord) {
+		String sql = null;
+		
+		List<StaffDto> list = new ArrayList<StaffDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			if(keyWord == null || "".equals(keyWord.trim())) {
+				sql = "SELECT * FROM "
+						+ "(SELECT ROWNUM r, a. * FROM "
+						+ "(select s.stfid, s.stfnm, j.jobnm, d.deptnm, s.phone, s.entrydt "
+						+ "from departments d, staff s, jobs j "
+						+ "where d.deptid = s.deptid "
+						+ "and j.jobid=s.jobid order by s.stfid desc) a) "
+						+ "WHERE r BETWEEN ? AND ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+			} else {
+				sql = "SELECT * FROM "
+						+ "(SELECT ROWNUM r, a. * FROM "
+						+ "(select s.stfid, s.stfnm, j.jobnm, d.deptnm, s.phone, s.entrydt "
+						+ "from departments d, staff s, jobs j "
+						+ "where d.deptid = s.deptid "
+						+ "and j.jobid=s.jobid "
+						+ "and " + keyField + " like ? "
+						+ "order by s.stfid desc) a) "
+						+ "WHERE r BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+			}
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				StaffDto sDto = new StaffDto();
+				
+				sDto.setStfid(rs.getString("stfid"));
+				sDto.setStfnm(rs.getString("stfnm"));
+				sDto.setJobnm(rs.getString("jobnm"));
+				sDto.setDeptnm(rs.getString("deptnm"));
+				sDto.setPhone(rs.getString("phone"));
+				sDto.setEntrydt(rs.getString("entrydt").substring(0, 10));
+				
+				list.add(sDto);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+		
+	}
+
+	public void insertAca(StaffDto sDto) {
+		String sql = "insert into academi("
+				+ "  acaid"
+				+ ", acanm"
+				+ ", entdt"
+				+ ", grddt"
+				+ ", major"
+				+ ", grd_yn"
+				+ ", grade"
+				+ ", regnm"
+				+ ", stfid) "
+				+ "values(aca_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sDto.getAcanm());
+			pstmt.setString(2, sDto.getEntdt());
+			pstmt.setString(3, sDto.getGrddt());
+			pstmt.setString(4, sDto.getMajor());
+			pstmt.setString(5, sDto.getGrd_yn());
+			pstmt.setDouble(6, sDto.getGrade());
+			pstmt.setString(7, sDto.getRegnm());
+			pstmt.setString(8, sDto.getStfid());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+	}
+	
 }

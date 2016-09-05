@@ -89,7 +89,7 @@ public class NoticeDao {
 				nDto.setNoticetitle(rs.getString("noticetitle"));
 				nDto.setStfnm(rs.getString("stfnm"));
 				nDto.setDeptnm(rs.getString("deptnm"));
-				nDto.setRegdt(rs.getString("regdt"));
+				nDto.setRegdt(rs.getString("regdt").substring(0, 10));
 				nDto.setReadcount(rs.getInt("readcount"));
 
 				list.add(nDto);

@@ -102,8 +102,7 @@
 							<script>
 								$(function() {
 
-									$("#replysubmit")
-											.click(
+									$("#replysubmit").click(
 													function(event) {
 														var stfid = $("#stfid");
 														var pName = $("#replyname")

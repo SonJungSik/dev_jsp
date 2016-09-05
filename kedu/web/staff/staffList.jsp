@@ -39,6 +39,17 @@
 			</div>
 			<div class="col-sm-8 text-left">
 				<h4>사원 리스트</h4>
+				<form class="form-inline" action="StaffServlet?command=staff_list" method="post">
+					<div class="form-group">
+					<select name="keyField" class="form-control">
+						<option value="stfid">사번</option>
+						<option value="stfnm">이름</option>
+						<option value="deptnm">부서명</option>
+					</select>
+					<input type="text" size=16 name="keyWord" class="form-control" >
+					<input type="submit" value="검색" class="form-control">
+				</div>
+				</form>
 				<table class="table table-hober">
 					<thead>
 						<tr>
@@ -69,6 +80,17 @@
 						<!--여기까지 반복문  -->
 					</tbody>
 				</table>
+				<div>
+			<c:if test="${pageDto.prevPage>0}">
+				<span><a href="StaffServlet?command=staff_list&curPage=${pageDto.prevPage}">이전</a></span>
+			</c:if>
+			<c:forEach  var="block" begin="${pageDto.firstPage}" end="${pageDto.lastPage}">
+				<a href="StaffServlet?command=staff_list&curPage=${block}">${block}</a>
+			</c:forEach>
+			<c:if test="${pageDto.nextPage>0}">
+				<span><a href="StaffServlet?command=staff_list&curPage=${pageDto.nextPage}">다음</a></span>
+			</c:if>
+		</div>
 
 
 			</div>

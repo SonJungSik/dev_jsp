@@ -14,6 +14,9 @@ public class StaffDetailFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/staff/staffDetail.jsp";
+		String stfid = request.getParameter("stfid");
+		
+		request.setAttribute("stfid", stfid);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

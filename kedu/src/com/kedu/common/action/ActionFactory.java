@@ -15,6 +15,7 @@ import com.kedu.project.action.ProjectWriteAction;
 import com.kedu.project.action.ProjectWriteFormAction;
 import com.kedu.reply.action.ReplyWriteAction;
 import com.kedu.skill.action.SkillChkAction;
+import com.kedu.staff.action.AcaDetailAction;
 import com.kedu.staff.action.LoginAction;
 import com.kedu.staff.action.LoginFormAction;
 import com.kedu.staff.action.MainAction;
@@ -91,6 +92,8 @@ public class ActionFactory {
 			action = new SkillChkAction();
 		} else if (command.equals("staff_detail_form")) {
 			action = new StaffDetailFormAction();
+		} else if (command.equals("aca_write")){
+			action = new AcaDetailAction();
 		}
 		return action;
 	}

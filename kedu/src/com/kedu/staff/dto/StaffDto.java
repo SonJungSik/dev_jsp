@@ -19,10 +19,52 @@ public class StaffDto {
 	private String regnm;
 	private int jobid;
 	private int deptid;
-	
 	private String deptnm;
 	private String jobnm;
 	
+	private String acanm;
+	private String entdt;
+	private String grddt;
+	private String major;
+	private String grd_yn;
+	private double grade;
+	
+	public String getAcanm() {
+		return acanm;
+	}
+	public void setAcanm(String acanm) {
+		this.acanm = acanm;
+	}
+	public String getEntdt() {
+		return entdt;
+	}
+	public void setEntdt(String entdt) {
+		this.entdt = entdt;
+	}
+	public String getGrddt() {
+		return grddt;
+	}
+	public void setGrddt(String grddt) {
+		this.grddt = grddt;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	public String getGrd_yn() {
+		return grd_yn;
+	}
+	public void setGrd_yn(String grd_yn) {
+		this.grd_yn = grd_yn;
+	}
+	public double getGrade() {
+		return grade;
+	}
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
 	public String getDeptnm() {
 		return deptnm;
 	}
