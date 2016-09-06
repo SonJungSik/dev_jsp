@@ -444,5 +444,46 @@ public class StaffDao {
 			DBManager.close(conn, pstmt);
 		}
 	}
+
+	public List<StaffDto> getDetail(String stfid) {
+		String sql = "select acaid, acanm, entdt, grddt, major, grd_yn, grade from academi "
+				+ "where stfid = ? "
+				+ "order by acaid desc";
+		
+		List<StaffDto> list = new ArrayList<StaffDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, stfid);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				StaffDto sDto = new StaffDto();
+				
+				sDto.setAcaid(rs.getInt("acaid"));
+				sDto.setAcanm(rs.getString("acanm"));
+				sDto.setEntdt(rs.getString("entdt").substring(0, 10));
+				sDto.setGrddt(rs.getString("grddt").substring(0, 10));
+				sDto.setMajor(rs.getString("major"));
+				sDto.setGrd_yn(rs.getString("grd_yn"));
+				sDto.setGrade(rs.getDouble("grade"));
+				
+				list.add(sDto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+	
+		return list;
+	}
 	
 }

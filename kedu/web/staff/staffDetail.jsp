@@ -88,10 +88,15 @@ $(function() {
 					+ '<td>'
 					+ grade.val()
 					+ '</td>'
-					+ '<td>'
-					+ regnm.val()
+					+ '<td>'//id="'${detailList.acaid }''
+					+ "<input type='button' value='삭제' class='button'>"
 					+ '</td>'
 					+ '</tr>';
+					
+					var aca_id=${detailList.acaid};
+					$("#"+aca_id).on("click",function(){
+						alert('click');
+					});
 
 						$.ajax({
                         	url:"StaffServlet?command=aca_write",
@@ -164,7 +169,18 @@ $(function() {
 								<td><input type="text" name="grade" id="grade" class="form-control" size="2">/4.5</td>
 								<td><input type="button" value="추가" class="button" name="acasubmit" id="acasubmit">
 								</td>
-								
+								<c:forEach items="${detailList}" var="detailList">
+									<tr>
+										<td>${detailList.acanm}	</td>
+										<td>${detailList.entdt}	</td>
+										<td>${detailList.grddt}	</td>
+										<td>${detailList.major}	</td>
+										<td>${detailList.grd_yn}</td>
+										<td>${detailList.grade}</td>
+										<td><input type="button" value="삭제" id="'${detailList.acaid }'"class="button"></td>
+										
+									</tr>
+								</c:forEach>
 							</tr>
 						</table>
 						</form>

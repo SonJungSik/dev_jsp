@@ -22,6 +22,7 @@ public class StaffDto {
 	private String deptnm;
 	private String jobnm;
 	
+	private int acaid;
 	private String acanm;
 	private String entdt;
 	private String grddt;
@@ -29,6 +30,12 @@ public class StaffDto {
 	private String grd_yn;
 	private double grade;
 	
+	public int getAcaid() {
+		return acaid;
+	}
+	public void setAcaid(int acaid) {
+		this.acaid = acaid;
+	}
 	public String getAcanm() {
 		return acanm;
 	}
