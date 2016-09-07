@@ -33,7 +33,7 @@ public class AcaDetailAction implements Action {
 		sDto.setGrade(grade);
 		sDto.setRegnm(regnm);
 		sDto.setStfid(stfid);
-		
+
 		StaffDao sDao = StaffDao.getInstance();
 		sDao.insertAca(sDto);
 		

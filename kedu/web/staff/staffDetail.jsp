@@ -43,6 +43,9 @@ $(function() {
 		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월']
 	});
 	
+	$(".delbutton").on("click",function(){
+		alert($(this).attr("id"));
+	});
 	$("#acasubmit").click(
 			function(event) {
 				var stfid = $("#stfid");
@@ -88,15 +91,12 @@ $(function() {
 					+ '<td>'
 					+ grade.val()
 					+ '</td>'
-					+ '<td>'//id="'${detailList.acaid }''
+					+ '<td>'
 					+ "<input type='button' value='삭제' class='button'>"
 					+ '</td>'
 					+ '</tr>';
 					
-					var aca_id=${detailList.acaid};
-					$("#"+aca_id).on("click",function(){
-						alert('click');
-					});
+					
 
 						$.ajax({
                         	url:"StaffServlet?command=aca_write",
@@ -170,14 +170,14 @@ $(function() {
 								<td><input type="button" value="추가" class="button" name="acasubmit" id="acasubmit">
 								</td>
 								<c:forEach items="${detailList}" var="detailList">
-									<tr>
+									<tr >
 										<td>${detailList.acanm}	</td>
 										<td>${detailList.entdt}	</td>
 										<td>${detailList.grddt}	</td>
 										<td>${detailList.major}	</td>
 										<td>${detailList.grd_yn}</td>
 										<td>${detailList.grade}</td>
-										<td><input type="button" value="삭제" id="'${detailList.acaid }'"class="button"></td>
+										<td><input type="button" class="delbutton" value="삭제" id="${detailList.acaid }" class="button"></td>
 										
 									</tr>
 								</c:forEach>
