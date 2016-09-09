@@ -42,9 +42,21 @@ $(function() {
 		monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8','9', '10', '11', '12'],
 		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월']
 	});
+	/* 달력 끝 */ 
 	
 	$(".delbutton").on("click",function(){
 		alert($(this).attr("id"));
+		
+		var acaid=$(this).attr("id");
+		$.ajax({
+        	url:"StaffServlet?command=aca_del",
+        	type:"post",
+        	data: inputData,
+        	dataType:"json",
+        	success: function(result){
+        				
+        	}
+        });
 	});
 	$("#acasubmit").click(
 			function(event) {
@@ -96,8 +108,6 @@ $(function() {
 					+ '</td>'
 					+ '</tr>';
 					
-					
-
 						$.ajax({
                         	url:"StaffServlet?command=aca_write",
                         	type:"post",
@@ -114,7 +124,7 @@ $(function() {
 						$("#grade").val("");
 			});
 
-/* 달력 끝 */ 
+
 });
 </script>
 </head>
