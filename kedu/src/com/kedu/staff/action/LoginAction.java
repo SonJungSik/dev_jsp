@@ -15,29 +15,31 @@ import com.kedu.staff.dto.StaffDto;
 public class LoginAction implements Action {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		
 		String url = "/index.jsp";
+		
+		HttpSession session = request.getSession();
+		
 		String stfid = request.getParameter("stfid");
 		String pwd = request.getParameter("pwd");
 		
 		StaffDao sDao = StaffDao.getInstance();
-		int result = sDao.userCheck(stfid, pwd);
+		int check = sDao.userCheck(stfid, pwd);
 		
-		if(result == 2) {
+		if(check == 2) {
 			StaffDto sDto = sDao.getStaff(stfid);
-			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", sDto);
-			url = "main.jsp";
+			url = "/main.jsp";
 			
-		} else if (result == 1) {
+		} else if (check == 1) {
 			StaffDto sDto = sDao.getStaff(stfid);
-			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", sDto);
-			url = "main.jsp";
-		} else if (result == 0) {
+			url = "/main.jsp";
+		} else if (check == 0) {
 			request.setAttribute("message", "비밀번호가 맞지 않습니다.");
-		} else if (result == -1) {
+		} else if (check == -1) {
 			request.setAttribute("message", "존재하지 않는 회원입니다.");
 		}
 		

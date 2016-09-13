@@ -17,20 +17,15 @@
 
 </head>
 
-<body>
+<body style="background: white;">
 <div class="container">
 
       <form class="form-signin" method="post" action="StaffServlet?command=login">
-        <h2 class="form-signin-heading">로그인 </h2>
+        <h3 class="form-signin-heading">사원 관리 시스템 </h3>
         <label for="userid" class="sr-only">userid</label>
         <input type="text" id="stfid" name="stfid"  class="form-control" placeholder="사번" required autofocus>
         <label for="password" class="sr-only">password</label>
         <input type="password" id="password"  name="pwd" class="form-control" placeholder="비밀번호" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
  		<div>${message }</div> 
       </form>

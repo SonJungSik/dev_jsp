@@ -101,7 +101,6 @@
 							</table>
 							<script>
 								$(function() {
-
 									$("#replysubmit").click(
 													function(event) {
 														var stfid = $("#stfid");
@@ -109,19 +108,15 @@
 														var pText = $("#replycontents");
 														var noticeno = $("#noticeno");
 														var inputData = new Object();
-														//alert(pText.val());
 														inputData.stfid=stfid.val();
 														inputData.contents=pText.val();
 														inputData.noticeno=noticeno.val();
-	
-														
 
 														if ($.trim(pName.val()) == "") {
 															alert("이름을 입력하세요.");
 															pName.focus();
 															return;
-														} else if ($.trim(pText
-																.val()) == "") {
+														} else if ($.trim(pText.val()) == "") {
 															alert("내용을 입력하세요.");
 															pText.focus();
 															return;
